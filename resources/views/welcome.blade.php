@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('content')
-    <div class="w-screen left-0 bg-[url('{{ asset('image/background-1.svg') }}')]">
+    <div class="w-screen left-0 bg-[url('{{ asset('image/background-1.svg') }}')] bg-center">
         <div class="h-screen w-full flex flex-col justify-center ml-10">
             <p class="text-5xl font-semibold text-white">AU COEUR</p>
             <p class="text-5xl font-semibold text-white">DU GRAPHISME</p>
@@ -204,35 +204,66 @@
         <div class="h-auto min-h-screen w-3/4 mx-auto flex flex-col justify-center">
             <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-5">
                 <div class="text-5xl col-span-1">C'est par ici que tout se crée</div>
-                <div class="bg-red-500 col-span-1 md:col-span-1 lg:col-span-2">
-                    <div class="carousel" style="display: flex; align-items: center;">
-                        <span class="prev" onclick="prevSlide()">
-                            < </span>
-                                <span class="carousel-img" style="display: flex; align-items: center;">
-                                    <img src="{{ $images[$slideIndex - 1] }}">
-                                    <img src="{{ $slideIndex < count($images) ? $images[$slideIndex] : $images[0] }}">
-                                </span>
-                                <span class="next" onclick="nextSlide()">
-                                    >
-                                </span>
+                <div class="col-span-1 md:col-span-1 lg:col-span-2 h-full border-y-2 border-[#E2D239]">
+                    <div class="flex flex-col justify-center items-center">
+                        <div class="max-w-4xl mx-auto relative" x-data="{
+                            activeSlide: 0,
+                            slides: [
+                                ['logo.svg', 'logo.svg'],
+                                ['no-data.svg', 'no-data.svg'],
+                                ['logosb.svg', 'logosb.svg'],
+                            ],
+                            imagePath: '{{ asset('image/') }}/'
+                        }">
+
+                            <!-- Slides -->
+                            <template x-for="(slidePair, index) in slides" :key="index">
+                                <div x-show="activeSlide === index" class="flex space-x-4">
+                                    <template x-for="slide in slidePair">
+                                        <div class="flex-1 p-4 rounded-lg w-full h-full">
+                                            <img :src="imagePath + slide" alt="Slide Image"
+                                                class="w-64 h-64 rounded-lg border-[16px] border-white">
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+
+                            <!-- Prev/Next Arrows -->
+                            <div class="absolute inset-0 flex">
+                                <div class="flex items-center justify-start w-1/2">
+                                    <button
+                                        x-on:click="activeSlide = activeSlide === 0 ? slides.length - 1 : activeSlide - 1"
+                                        class="text-3xl bg-[#222323] text-white hover:text-orange-500 font-bold hover:shadow-lg rounded-full w-12 h-12 -ml-6">
+                                        ‹
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-end w-1/2">
+                                    <button
+                                        x-on:click="activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1"
+                                        class="text-3xl bg-[#222323] text-white hover:text-orange-500 font-bold hover:shadow rounded-full w-12 h-12 -mr-6">
+                                        ›
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="w-full flex items-center justify-center px-4 m-5">
+                                <template x-for="(slidePair, index) in slides" :key="index">
+                                    <button x-on:click="activeSlide = index"
+                                        class="flex-1 w-4 h-2 mt-4 mx-2 mb-0 rounded-full overflow-hidden transition-colors duration-200 ease-out hover:bg-teal-600 hover:shadow-lg"
+                                        :class="{
+                                            'bg-[#E2D239]': activeSlide === index,
+                                            'bg-[#1F1F1E]': activeSlide !== index
+                                        }"></button>
+                                </template>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        let slideIndex = $slideIndex;
-        const images = $images;
-
-        function nextSlide() {
-            slideIndex < images.length ? slideIndex++ : slideIndex = 1;
-            // Update the DOM accordingly...
-        }
-
-        function prevSlide() {
-            slideIndex > 1 ? slideIndex-- : slideIndex = images.length;
-            // Update the DOM accordingly...
-        }
-    </script>
+    </div>
+    <script></script>
 @endsection
