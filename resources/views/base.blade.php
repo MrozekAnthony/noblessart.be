@@ -16,12 +16,7 @@
             overflow-x: hidden;
         }
 
-        @media screen and (min-width: 2048px) {
-            html {
-                width: 80% !important;
-                margin: auto;
-            }
-        }
+
 
         @media (min-width: 1024px) {
             .carousel-slide {
@@ -92,9 +87,9 @@
             <div class="text-center">
                 <h1 class="text-2xl tracking-wider">noblessart;</h1>
                 <div class="mt-2 space-x-4">
-                    <a href="#" class="text-black hover:underline">Home</a>
-                    <a href="#" class="text-black hover:underline">Blog</a>
-                    <a href="#" class="text-black hover:underline">Galeries</a>
+                    <a href="/" class="text-black hover:underline">Home</a>
+                    <a href="/blog" class="text-black hover:underline">Blog</a>
+                    <a href="/galerie" class="text-black hover:underline">Galeries</a>
                 </div>
             </div>
 
@@ -115,12 +110,10 @@
                 <button id="closeBtn" class="block top-2 right-0 p-2 focus:outline-none text-white">✕</button>
             </div>
 
-            <a href="#" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Home</a>
-            <a href="#" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Blog</a>
-            <a href="#" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Galeries</a>
-            <a href="#" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Qui est
-                noblessart?</a>
-            <a href="#" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Tarifs</a>
+            <a href="/" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Home</a>
+            <a href="/blog" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Blog</a>
+            <a href="/galerie" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Galeries</a>
+            <a href="/tarif" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Tarifs</a>
             <a href="#" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Mentions légales</a>
             <a href="#" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Conditions générales
                 d'utilisation</a>
