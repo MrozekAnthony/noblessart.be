@@ -46,6 +46,10 @@ Route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(
 Route::prefix('/dashboard')->name('dashboard.')->middleware('auth')->controller(DashboardController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/blog', 'blog')->name('blog');
+    Route::get('/blog/creer', 'blogForm')->name('createBlog');
+    Route::post('/blog/creer', 'createBlog')->name('createBlog');
+    //Route::get('/blog/{id}/modifier', 'blogForm')->name('blogForm');
+    Route::delete('/blog/{id}/supprimer', 'destroyBlog')->name('destroyBlog');
     Route::get('/galerie', 'gallery')->name('gallery');
     Route::get('/parametre', 'parameter')->name('parameter');
     Route::get('/utilisateur', 'user')->name('user');

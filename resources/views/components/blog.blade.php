@@ -1,23 +1,30 @@
-<div class="w-90 mx-auto h-[calc(100vh-240px)] overflow-y-auto">
+@props(['blog' => []])
+<div x-data="{ openModal: false }" class="w-90 mx-auto h-[calc(100vh-240px)] overflow-y-auto">
+
+    <!-- Section principale -->
     <section class="text-gray-600 body-font">
-        <h1 class="text-3xl">Liste des Blog</h1>
+        <h1 class="text-3xl text-center p-5">Liste des Blog</h1>
+
+        <!-- Bouton pour ouvrir la modal -->
+        <button @click="openModal = true"
+            class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 m-5 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            Ajouter un article
+        </button>
         <div class="container px-5 py-24 bg-white ">
             <div class="flex flex-wrap -m-4">
-                @for ($i = 0; $i < 10; $i++)
+                @forelse($blog as $post)
                     <div class="p-4 lg:w-1/3">
                         <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                             <img class="lg:h-48 md:h-36 w-full object-cover object-center"
                                 src="https://dummyimage.com/720x400" alt="blog">
                             <div class="p-6">
-                                <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY
-                                    {{ $i }}
+                                <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                                    {{ $post->category }}</h2>
                                 </h2>
-                                <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Titre {{ $i }}
+                                <h1 class="title-font text-lg font-medium text-gray-900 mb-3"> {{ $post->title }}}
                                 </h1>
                                 <p class="leading-relaxed mb-3">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis expedita
-                                    repellat earum officiis dicta fugiat officia...
-
+                                    {{ $post->content }}
                                 </p>
                                 <div class="flex items-center flex-wrap ">
                                     <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Lire plus
@@ -49,9 +56,39 @@
                             </div>
                         </div>
                     </div>
-                @endfor
+                @empty
+                    <p>No Data</p>
+                @endforelse
             </div>
         </div>
     </section>
 
+
+    <div x-show="openModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50" x-cloak>
+        <div @click.away="openModal = false" class="bg-white w-2/3 rounded shadow-lg p-8 m-4 max-h-full text-center">
+            <h2 class="text-2xl font-bold mb-4">Ajouter un article</h2>
+            <form action="/dashboard/blog/creer" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label for="title" class="block text-sm font-bold mb-2">Titre:</label>
+                    <input type="text" name="title" class="w-full p-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="category" class="block text-sm font-bold mb-2">Catégorie:</label>
+                    <input type="text" name="category" class="w-full p-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="content" class="block text-sm font-bold mb-2">Contenu:</label>
+                    <textarea name="content" id="mytextarea"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded mt-4">Soumettre</button>
+            </form>
+        </div>
+    </div>
+
 </div>
+<script>
+    tinymce.init({
+        selector: '#mytextarea' // remplacez cette valeur pour cibler un autre textarea
+    });
+</script>

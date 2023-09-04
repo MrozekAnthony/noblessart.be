@@ -31,7 +31,7 @@
                     <!-- Contenu Principal -->
                     <div class="flex-1 bg-gray-200 p-6 h-100">
                         @if ($tab == 'dashboard')
-                            <x-dashboard></x-dashboard>
+                            <x-dashboard :blog="$blog"></x-dashboard>
                         @elseif($tab == 'blog')
                             <x-blog></x-blog>
                         @elseif($tab == 'gallery')
