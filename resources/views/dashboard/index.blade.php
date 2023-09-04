@@ -20,22 +20,26 @@
                                 class="{{ $tab === 'user' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Utilisateurs</a>
                             <a href="/dashboard/parametre"
                                 class="{{ $tab === 'parameter' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Paramètres</a>
-                            <a href="/dashboard/deconnexion"
-                                class="text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Déconnexion</a>
+                            <form action="{{ route('auth.logout') }}" method="post"
+                                class="text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">
+                                @method('delete')
+                                @csrf
+                                <button type="submit">Se déconnecter</button>
+                            </form>
                         </nav>
                     </div>
                     <!-- Contenu Principal -->
                     <div class="flex-1 bg-gray-200 p-6 h-100">
-                        @if ($tab == 'dashboard' && $user->id)
-                            <x-dashboard :user="$user"></x-dashboard>
-                        @elseif($tab == 'blog' && $user->id)
-                            <x-blog :user="$user"></x-blog>
+                        @if ($tab == 'dashboard')
+                            <x-dashboard></x-dashboard>
+                        @elseif($tab == 'blog')
+                            <x-blog></x-blog>
                         @elseif($tab == 'gallery')
-                            <x-gallery :user="$user"></x-gallery>
+                            <x-gallery></x-gallery>
                         @elseif($tab == 'user')
-                            <x-user :user="$user"></x-user>
+                            <x-user></x-user>
                         @elseif($tab == 'parameter')
-                            <x-parameter :user="$user"></x-parameter>
+                            <x-parameter></x-parameter>
                         @endif
                     </div>
                 </div>

@@ -10,37 +10,26 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $auth = Auth::attempt(['email' => 'info@digam.be', 'password' => 'password']);
-        $user = Auth::user();
-        //dd($user);
-        return view('dashboard.index', ['tab' => 'dashboard', 'user' => $user]);
+        return view('dashboard.index', ['tab' => 'dashboard']);
     }
 
     public function blog()
     {
-        $auth = Auth::attempt(['email' => 'info@digam.be', 'password' => 'password']);
-        $user = Auth::user();
-        return view('dashboard.index', ['tab' => 'blog', 'user' => $user]);
+        return view('dashboard.index', ['tab' => 'blog']);
     }
 
     public function gallery()
     {
-        $auth = Auth::attempt(['email' => 'info@digam.be', 'password' => 'password']);
-        $user = Auth::user();
-        return view('dashboard.index', ['tab' => 'gallery', 'user' => $user]);
+        return view('dashboard.index', ['tab' => 'gallery']);
     }
 
     public function parameter()
     {
-        $auth = Auth::attempt(['email' => 'info@digam.be', 'password' => 'password']);
-        $user = Auth::user();
-        return view('dashboard.index', ['tab' => 'parameter', 'user' => $user]);
+        return view('dashboard.index', ['tab' => 'parameter']);
     }
 
     public function user()
     {
-        $auth = Auth::attempt(['email' => 'info@digam.be', 'password' => 'password']);
-        $user = Auth::user();
-        return view('dashboard.index', ['tab' => 'user', 'user' => $user]);
+        return view('dashboard.index', ['tab' => 'user']);
     }
 }

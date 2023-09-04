@@ -81,7 +81,9 @@
         <div class=" flex items-center justify-between">
 
             <!-- Logo à gauche -->
-            <img src="{{ asset('image/logosb.svg') }}" alt="Logo" class="sm:h-32 h-16 w-auto">
+            <a href="/">
+                <img src="{{ asset('image/logosb.svg') }}" alt="Logo" class="sm:h-32 h-16 w-auto">
+            </a>
 
             <!-- Titre et liens au milieu -->
             <div class="text-center">
@@ -93,10 +95,20 @@
                 </div>
             </div>
 
-            <!-- Bouton hamburger à droite -->
-            <button id="hamburgerBtn" class="p-2 focus:outline-none">
-                ☰
-            </button>
+            @auth
+                <!-- Bouton hamburger à droite -->
+                <button id="hamburgerBtn" class="p-2 focus:outline-none border-2 border-[#E2D239]"
+                    title="Cliquez pour ouvrir le menu">
+                    ☰
+                </button>
+            @endauth
+
+            @guest
+                <!-- Bouton hamburger à droite -->
+                <button id="hamburgerBtn" class="p-2 focus:outline-none" title="Cliquez pour ouvrir le menu">
+                    ☰
+                </button>
+            @endguest
 
         </div>
 
@@ -113,16 +125,32 @@
             <a href="/" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Home</a>
             <a href="/blog" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Blog</a>
             <a href="/galerie" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Galeries</a>
-            <a href="/tarif" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Tarifs</a>
-            <a href="#" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Mentions légales</a>
-            <a href="#" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Conditions générales
+            <a href="/abonnement" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Tarifs</a>
+            <a href="/mentions-legales" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Mentions
+                légales</a>
+            <a href="/conditions-generales-de-vente"
+                class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Conditions générales
                 d'utilisation</a>
-            <a href="#" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">FAQ</a>
+            <a href="/faq" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">FAQ</a>
 
             <div class="flex-row justify-center items-center h-16 pt-10 w-80 mx-auto">
-                <a href="#" class="block hover:bg-gray-600 p-4 text-center">Se connecter</a>
-                <span href="#" class="block p-0 m-0 text-center">ou</span>
-                <a href="#" class="block hover:bg-gray-600 p-4 text-center">Créer un compte</a>
+                @auth
+                    <a class="block hover:bg-gray-600 p-4 text-center" href="/dashboard">
+                        😀 Profil de {{ \illuminate\Support\Facades\Auth::user()->name }}
+                    </a>
+                    <form action="{{ route('auth.logout') }}" method="post"
+                        class="block hover:bg-gray-600 p-4 text-center">
+                        @method('delete')
+                        @csrf
+                        <button type="submit">Se déconnecter</button>
+                    </form>
+                @endauth
+
+                @guest
+                    <a href="/connexion" class="block hover:bg-gray-600 p-4 text-center">Se connecter</a>
+                    <span href="#" class="block p-0 m-0 text-center">ou</span>
+                    <a href="/creer-un-compte" class="block hover:bg-gray-600 p-4 text-center">Créer un compte</a>
+                @endguest
             </div>
 
         </div>

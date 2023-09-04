@@ -1,93 +1,121 @@
 @extends('base')
 
 @section('content')
-    <div class="w-90 mx-auto">
-        <section class="text-gray-600 body-font">
-            <div class="container mx-auto flex h-full p-10">
-
-                <!-- Première partie (2/3 de la page) -->
-                <div class="bg-white p-10 rounded-lg shadow-lg">
-                    <p class="py-5 text-3xl">Souscrire à un abonnement</p>
-                    <div class="w-2/3 flex space-x-6 text-center justify-center space-evenly mx-auto">
-
-                        <!-- Tarifs Particuliers -->
-                        <div class="w-1/2 flex flex-col space-y-6 border border-black p-2">
-                            <h2 class="text-2xl font-bold mb-4">Tarifs Particuliers</h2>
-
-                            <!-- Grille 1 -->
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                Amortissement de la commande
-                            </div>
-
-                            <!-- Grille 2 -->
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                Formation
-                            </div>
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                Choix du délai de paiement
-                            </div>
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                Service client premium
-                            </div>
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                Jusqu'à trois modification possible
-                            </div>
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                Conseils offerts
-                            </div>
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                * Étudiant ? 10% de réduction au moment de la présentation de la carte étudiant !
-                            </div>
-                            <div class="p-2 flex-1">
-                                à partir de 9,99€
-                            </div>
-                        </div>
-
-                        <!-- Tarifs Professionnels -->
-                        <div class="w-1/2 flex flex-col space-y-6 border border-black p-2">
-                            <h2 class="text-2xl font-bold mb-4">Tarifs Professionnels</h2>
-
-                            <!-- Grille 1 -->
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                Amortissement de la commande
-                            </div>
-
-                            <!-- Grille 2 -->
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                Formation
-                            </div>
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                Choix du délai de paiement
-                            </div>
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                Service client premium
-                            </div>
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                Jusqu'à trois modification possible
-                            </div>
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                Conseils offerts
-                            </div>
-                            <div class="p-2 border-b-2 border-black flex-1">
-                                * Étudiant ? 10% de réduction au moment de la présentation de la carte étudiant !
-                            </div>
-                            <div class="p-2 flex-1">
-                                à partir de 49,99€
-                            </div>
-                        </div>
-                    </div>
+    <section class="text-gray-600 body-font">
+        <p class="py-5 pl-5 text-3xl">Souscrire à un abonnement</p>
+        <div class="container px-5 py-24 mx-auto flex ">
+            <div class="flex flex-wrap -m-3 mx-auto">
+                <div class="p-4 lg:w-1/2 sm:w-1/2 w-full border border-2 text-center">
+                    <h2 class="mb-4 text-center sm:text-left">
+                        Tarifs Particuliers</h2>
+                    <nav class="flex flex-col sm:items-start sm:text-left text-center items-center -mb-1 space-y-2.5">
+                        <a>
+                            <span
+                                class="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="3" class="w-3 h-3" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Amortissement de la commande
+                        </a>
+                        <a>
+                            <span
+                                class="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="3" class="w-3 h-3" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Choix du délai de paiement
+                        </a>
+                        <a>
+                            <span
+                                class="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="3" class="w-3 h-3" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Service client premium
+                        </a>
+                        <a>
+                            <span
+                                class="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="3" class="w-3 h-3" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Jusqu'à trois modification possible
+                        </a>
+                        <a>
+                            <span
+                                class="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="3" class="w-3 h-3" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Conseils offerts
+                        </a>
+                        <a>
+                            à partir de 9,99€*
+                        </a>
+                        <a>
+                            * Étudiant ? 10% de réduction au moment de la présentation de la carte étudiant !
+                        </a>
+                    </nav>
                 </div>
-
-                <!-- Deuxième partie (1/3 de la page) -->
-                <div class="w-1/3 bg-white ml-6 rounded-lg shadow-lg flex items-center justify-center">
-                    <div class="flex-row justify-center items-center h-16 w-80 mx-auto">
-                        <a href="#" class="block p-4 text-center">Se connecter</a>
-                        <span href="#" class="block p-0 m-0 text-center">ou</span>
-                        <a href="#" class="block p-4 text-center">Créer un compte</a>
-                    </div>
+                <div class="p-4 lg:w-1/2 sm:w-1/2 w-full border border-2 text-center">
+                    <h2 class="mb-4 text-center sm:text-left">
+                        Tarifs Professionnels</h2>
+                    <nav class="flex flex-col sm:items-start sm:text-left text-center items-center -mb-1 space-y-2.5">
+                        <a>
+                            <span
+                                class="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="3" class="w-3 h-3" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Amortissement de la commande
+                        </a>
+                        <a>
+                            <span
+                                class="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="3" class="w-3 h-3" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Choix du délai de paiement
+                        </a>
+                        <a>
+                            <span
+                                class="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="3" class="w-3 h-3" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Service client premium
+                        </a>
+                        <a>
+                            <span
+                                class="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="3" class="w-3 h-3" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Jusqu'à trois modification possible
+                        </a>
+                        <a>
+                            <span
+                                class="bg-indigo-100 text-indigo-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="3" class="w-3 h-3" viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5"></path>
+                                </svg>
+                            </span>Conseils offerts
+                        </a>
+                        <a>
+                            à partir de 49,99€
+                        </a>
+                    </nav>
                 </div>
-
             </div>
-        </section>
-    </div>
+    </section>
 @endsection

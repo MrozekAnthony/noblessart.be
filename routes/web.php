@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DashboardController;
@@ -42,7 +43,7 @@ Route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(
     ])->name('show');
 });
 
-Route::prefix('/dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
+Route::prefix('/dashboard')->name('dashboard.')->middleware('auth')->controller(DashboardController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/blog', 'blog')->name('blog');
     Route::get('/galerie', 'gallery')->name('gallery');
@@ -73,3 +74,7 @@ Route::get('/conditions-generales-de-vente', function () {
 Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
+
+Route::get('/connexion', [AuthController::class, 'login'])->middleware('guest')->name('auth.login');
+Route::post('/connexion', [AuthController::class, 'doLogin']);
+Route::delete('/deconnexion', [AuthController::class, 'logout'])->name('auth.logout');
