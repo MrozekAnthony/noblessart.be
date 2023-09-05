@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Post;
+use App\Models\Gallery;
+use App\Models\Parameter;
+
 
 class DashboardController extends Controller
 {
@@ -16,8 +19,10 @@ class DashboardController extends Controller
 
     public function blog()
     {
-        $blog = Post::all();
-        return view('dashboard.index', ['tab' => 'blog', 'blog' => $blog]);
+        // dd(Post::all());
+        // return view('dashboard.index', ['tab' => 'blog', 'posts' => Post::all()]);
+        return view('dashboard.index', ['tab' => 'blog'])
+            ->with('posts', Post::all());
     }
 
     public function createBlog(Request $request)
@@ -39,16 +44,19 @@ class DashboardController extends Controller
 
     public function gallery()
     {
-        return view('dashboard.index', ['tab' => 'gallery']);
+        return view('dashboard.index', ['tab' => 'gallery'])
+            ->with('galleries', Gallery::all());
     }
 
     public function parameter()
     {
         return view('dashboard.index', ['tab' => 'parameter']);
+        //->with('parameters', Parameter::all());
     }
 
     public function user()
     {
-        return view('dashboard.index', ['tab' => 'user']);
+        return view('dashboard.index', ['tab' => 'user'])
+            ->with('users', User::all());
     }
 }

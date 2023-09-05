@@ -5,7 +5,6 @@
         <section class="text-gray-600 body-font">
             <div class="justify-center flex h-full p-10">
                 <div class="h-full w-full flex">
-
                     <!-- Menu Vertical sur la Gauche -->
                     <div class="bg-white w-64 p-6 flex flex-col border-r">
                         <h1 class="text-2xl font-bold mb-6">Mon Dashboard</h1>
@@ -28,18 +27,24 @@
                             </form>
                         </nav>
                     </div>
+                    {{-- @foreach ($posts as $post)
+                        <p class="text-blue-100">{{ $post->title }}</p>
+                        <p class="text-blue-100">{{ $post->category }}</p>
+                        <p class="text-blue-100">{{ $post->content }}</p>
+                    @endforeach --}}
                     <!-- Contenu Principal -->
                     <div class="flex-1 bg-gray-200 p-6 h-100">
                         @if ($tab == 'dashboard')
-                            <x-dashboard :blog="$blog"></x-dashboard>
+                            <x-dashboard></x-dashboard>
                         @elseif($tab == 'blog')
-                            <x-blog></x-blog>
+                            <x-blog :posts="$posts"></x-blog>
                         @elseif($tab == 'gallery')
-                            <x-gallery></x-gallery>
+                            <x-gallery :galleries="$galleries"></x-gallery>
                         @elseif($tab == 'user')
-                            <x-user></x-user>
+                            <x-user :users="$users"></x-user>
                         @elseif($tab == 'parameter')
                             <x-parameter></x-parameter>
+                            {{-- <x-parameter :parameters="$parameters"></x-parameter> --}}
                         @endif
                     </div>
                 </div>
