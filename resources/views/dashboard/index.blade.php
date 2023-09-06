@@ -37,7 +37,7 @@
                         @if ($tab == 'dashboard')
                             <x-dashboard></x-dashboard>
                         @elseif($tab == 'blog')
-                            <x-blog :posts="$posts"></x-blog>
+                            <x-blog :posts="$posts" :categories="$categories"></x-blog>
                         @elseif($tab == 'gallery')
                             <x-gallery :galleries="$galleries"></x-gallery>
                         @elseif($tab == 'user')

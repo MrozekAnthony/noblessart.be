@@ -1,107 +1,146 @@
-@props(['posts'])
-<div x-data="{ openModal: false, update: false, currentPost: {} }" class="w-90 mx-auto h-[calc(100vh-240px)] overflow-y-auto">
+@props(['posts', 'categories'])
 
-    <!-- Section principale -->
-    <section class="text-gray-600 body-font">
-        <h1 class="text-3xl text-center p-5">Liste des Blog</h1>
+<div class="w-90 mx-auto h-[calc(100vh-240px)] overflow-y-auto">
+    <div x-data="{
+        openModal: false,
+        isEdit: false,
+        currentPost: {
+            id: '',
+            title: '',
+            content: '',
+            category_id: '',
+            image: ''
+        },
+        confirmDelete(postId) {
+            if (confirm('Voulez-vous vraiment supprimer ce blog ?')) {
+                document.getElementById('postToDelete').value = postId;
+                document.getElementById('deleteForm').submit();
+            }
+        }
+    }">
 
-        <!-- Bouton pour ouvrir la modal -->
-        <button @click="openModal = true; update = false; currentPost = {}"
-            class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 m-5 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-            Ajouter un article
-        </button>
+        <!-- Section principale -->
+        <section class="text-gray-600 body-font">
+            <h1 class="text-3xl text-center p-5">Liste des Blogs</h1>
 
-        <div class="container px-5 py-24 bg-white ">
-            <div class="flex flex-wrap -m-4">
-                @forelse($posts as $post)
-                    <div class="p-4 lg:w-1/3">
-                        <div
-                            class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden relative">
-                            <img class="lg:h-48 md:h-36 w-full object-cover object-center"
-                                src="https://dummyimage.com/720x400" alt="blog">
-                            <a @click="openModal = true; update = true; currentPost = { title: '{{ $post->title }}', category_id: '{{ $post->category_id }}', content: '{{ $post->content }}' }; updateTinyMCE(currentPost.content);"
-                                class="absolute top-2 right-2 bg-white p-2 rounded-full hover:bg-gray-200">
+            <!-- Bouton pour ouvrir la modal -->
+            <button
+                @click="openModal=true; isEdit=false; currentPost = { id: '', title: '', content: '', category_id: '', image: '' }"
+                class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 m-5 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                Ajouter un article
+            </button>
 
-                                <img src="{{ asset('image/crayon.svg') }}" alt="avatar"
-                                    class="w-8 h-8 object-cover object-center">
-                            </a>
-                            <div class="p-6">
-                                <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                                    {{ $post->category->name ?? '' }}
-                                </h2>
-                                <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
-                                    {{ $post->title }}
-                                </h1>
+            <div class="container px-5 py-24 bg-white">
+                <div class="flex flex-wrap -m-4">
+                    @forelse($posts as $post)
+                        <div class="p-4 lg:w-1/3">
+                            <div
+                                class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden relative">
+                                <img class="h-64 md:h-48 lg:h-36 w-full object-center object-cover"
+                                    src="{{ $post->image ? asset($post->image) : 'https://dummyimage.com/720x400' }}"
+                                    alt="blog">
 
-                                <div class="flex items-center flex-wrap ">
-                                    <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Lire plus
-                                        <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor"
-                                            stroke-width="2" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path d="M5 12h14"></path>
-                                            <path d="M12 5l7 7-7 7"></path>
-                                        </svg>
-                                    </a>
-                                    <span
-                                        class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                                        <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg>{{ 1 * rand(1, 5) }}K
-                                    </span>
-                                    <span class="text-gray-400 inline-flex items-center leading-none text-sm">
-                                        <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                                            <path
-                                                d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                            </path>
-                                        </svg>
-                                        {{ 1 }}
-                                    </span>
+
+
+
+                                <button
+                                    @click="openModal=true; isEdit=true; currentPost = { 
+                                    id: '{{ $post->id }}', 
+                                    title: '{{ $post->title }}', 
+                                    content: '{{ $post->content }}', 
+                                    category_id: '{{ $post->category_id }}', 
+                                    image: '{{ $post->image }}' 
+                                };
+                                setTimeout(() => {
+                                    if(tinymce.get('content-editor')) {
+                                        tinymce.get('content-editor').setContent(currentPost.content);
+                                    }
+                                }, 100)"
+                                    class="absolute top-2 right-2 bg-white p-2 rounded-full hover:bg-gray-200">
+                                    <img src="{{ asset('image/crayon.svg') }}" alt="Éditer"
+                                        class="w-8 h-8 object-cover object-center">
+                                </button>
+
+                                <div class="p-6">
+                                    <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                                        {{ $post->category->name ?? '' }}
+                                    </h2>
+                                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
+                                        {{ $post->title }}
+                                    </h1>
                                 </div>
                             </div>
                         </div>
+                    @empty
+                        <p>No Data</p>
+                    @endforelse
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal (créer/modifier) -->
+        <div x-show="openModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+            <div @click.away="openModal = false"
+                class="bg-white w-2/3 rounded shadow-lg p-8 m-4 max-h-screen overflow-y-auto text-center">
+                <div x-show="isEdit">
+                    <button @click="confirmDelete(currentPost.id)" class="text-red-500 hover:text-red-700">
+                        Supprimer ?<img src="{{ asset('image/logo.svg') }}" alt="aaa" class="w-16 h-16">
+                    </button>
+                </div>
+                <h2 class="text-2xl font-bold mb-4" x-text="isEdit ? 'Modifier l\'article' : 'Ajouter un article'"></h2>
+                <form :action="isEdit ? '/dashboard/blog/modifier/' + currentPost.id : '/dashboard/blog/creer'"
+                    method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="mb-4">
+                        <label for="image" class="block text-sm font-bold mb-2">Image:</label>
+                        <input type="file" name="image" class="w-full p-2 border rounded">
+                        <img x-show="currentPost.image" :src={{ asset('currentPost.image') }} class="mt-4 w-48">
                     </div>
-                @empty
-                    <p>No Data</p>
-                @endforelse
+
+                    <div class="mb-4">
+                        <label for="title" class="block text-sm font-bold mb-2">Titre:</label>
+                        <input x-model="currentPost.title" type="text" name="title"
+                            class="w-full p-2 border rounded" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="category_id" class="block text-sm font-bold mb-2">Catégorie:</label>
+                        <select name="category_id" x-model="currentPost.category_id" class="w-full p-2 border rounded">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="content" class="block text-sm font-bold mb-2">Contenu:</label>
+                        <textarea id="content-editor" x-model="currentPost.content" name="content" class="w-full p-2 border rounded"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded mt-4">Soumettre</button>
+                </form>
+                <!-- Formulaire caché pour la suppression -->
+                <form id="deleteForm" method="POST" :action="'/dashboard/blog/supprimer/' + currentPost.id"
+                    style="display: none;">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="post_id" id="postToDelete">
+                </form>
+
             </div>
         </div>
-    </section>
 
-
-    <div x-show="openModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50" x-cloak>
-        <div @click.away="openModal = false" class="bg-white w-2/3 rounded shadow-lg p-8 m-4 max-h-full text-center">
-            <h2 class="text-2xl font-bold mb-4">Ajouter un article</h2>
-            <form action="/dashboard/blog/creer" method="POST">
-                @csrf
-                <div class="mb-4">
-                    <label for="title" class="block text-sm font-bold mb-2">Titre:</label>
-                    <input x-model="currentPost.title" type="text" name="title" class="w-full p-2 border rounded"
-                        required>
-                </div>
-                <div class="mb-4">
-                    <label for="category" class="block text-sm font-bold mb-2">Catégorie:</label>
-                    <input x-model="currentPost.category_id" type="text" name="category"
-                        class="w-full p-2 border rounded" required>
-                </div>
-                <div class="mb-4">
-                    <label for="content" class="block text-sm font-bold mb-2">Contenu:</label>
-                    <textarea x-model="currentPost.content" name="content" id="mytextarea"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded mt-4">Soumettre</button>
-            </form>
-        </div>
+        <!-- Initialisation de TinyMCE -->
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                setup: function(editor) {
+                    editor.on('Change', function(e) {
+                        document.querySelector('textarea').dispatchEvent(new InputEvent('input'));
+                    });
+                }
+            });
+        </script>
     </div>
-
 </div>
-<script>
-    tinymce.init({
-        selector: '#mytextarea' // remplacez cette valeur pour cibler un autre textarea
-    });
-
-    function updateTinyMCE(content) {
-        tinymce.get('mytextarea').setContent(content);
-    }
-</script>
