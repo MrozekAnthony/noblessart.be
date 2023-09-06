@@ -4,9 +4,9 @@
     <div class="w-90 mx-auto h-screen overflow-hidden">
         <section class="text-gray-600 body-font">
             <div class="justify-center flex h-full p-10">
-                <div class="h-full w-full flex">
+                <div class="h-full w-full flex flex-col md:flex-row">
                     <!-- Menu Vertical sur la Gauche -->
-                    <div class="bg-white w-64 p-6 flex flex-col border-r">
+                    <div class="bg-white md:w-64 w-full p-6 flex flex-col border-r">
                         <h1 class="text-2xl font-bold mb-6">Mon Dashboard</h1>
                         <nav class="text-center">
                             <a href="/dashboard/"
@@ -33,7 +33,7 @@
                         <p class="text-blue-100">{{ $post->content }}</p>
                     @endforeach --}}
                     <!-- Contenu Principal -->
-                    <div class="flex-1 bg-gray-200 p-6 h-100">
+                    <div class="flex-1 bg-gray-200 p-6 h-100 mt-6 md:mt-0">
                         @if ($tab == 'dashboard')
                             <x-dashboard></x-dashboard>
                         @elseif($tab == 'blog')

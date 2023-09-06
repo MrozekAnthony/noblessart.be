@@ -22,7 +22,7 @@ class DashboardController extends Controller
         // dd(Post::all());
         // return view('dashboard.index', ['tab' => 'blog', 'posts' => Post::all()]);
         return view('dashboard.index', ['tab' => 'blog'])
-            ->with('posts', Post::all());
+            ->with('posts', Post::with('category')->get());
     }
 
     public function createBlog(Request $request)

@@ -1,12 +1,12 @@
 @props(['posts'])
-<div x-data="{ openModal: false }" class="w-90 mx-auto h-[calc(100vh-240px)] overflow-y-auto">
+<div x-data="{ openModal: false, update: false, currentPost: {} }" class="w-90 mx-auto h-[calc(100vh-240px)] overflow-y-auto">
 
     <!-- Section principale -->
     <section class="text-gray-600 body-font">
         <h1 class="text-3xl text-center p-5">Liste des Blog</h1>
 
         <!-- Bouton pour ouvrir la modal -->
-        <button @click="openModal = true"
+        <button @click="openModal = true; update = false; currentPost = {}"
             class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 m-5 focus:outline-none hover:bg-indigo-600 rounded text-lg">
             Ajouter un article
         </button>
@@ -19,21 +19,19 @@
                             class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden relative">
                             <img class="lg:h-48 md:h-36 w-full object-cover object-center"
                                 src="https://dummyimage.com/720x400" alt="blog">
-                            <a href="#"
+                            <a @click="openModal = true; update = true; currentPost = { title: '{{ $post->title }}', category_id: '{{ $post->category_id }}', content: '{{ $post->content }}' }; updateTinyMCE(currentPost.content);"
                                 class="absolute top-2 right-2 bg-white p-2 rounded-full hover:bg-gray-200">
+
                                 <img src="{{ asset('image/crayon.svg') }}" alt="avatar"
                                     class="w-8 h-8 object-cover object-center">
                             </a>
                             <div class="p-6">
                                 <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                                    {{ $post->category }}
+                                    {{ $post->category->name ?? '' }}
                                 </h2>
                                 <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
                                     {{ $post->title }}
                                 </h1>
-                                <p class="leading-relaxed mb-3">
-                                    {!! $post->content !!}
-                                </p>
 
                                 <div class="flex items-center flex-wrap ">
                                     <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Lire plus
@@ -80,15 +78,17 @@
                 @csrf
                 <div class="mb-4">
                     <label for="title" class="block text-sm font-bold mb-2">Titre:</label>
-                    <input type="text" name="title" class="w-full p-2 border rounded" required>
+                    <input x-model="currentPost.title" type="text" name="title" class="w-full p-2 border rounded"
+                        required>
                 </div>
                 <div class="mb-4">
                     <label for="category" class="block text-sm font-bold mb-2">Catégorie:</label>
-                    <input type="text" name="category" class="w-full p-2 border rounded" required>
+                    <input x-model="currentPost.category_id" type="text" name="category"
+                        class="w-full p-2 border rounded" required>
                 </div>
                 <div class="mb-4">
                     <label for="content" class="block text-sm font-bold mb-2">Contenu:</label>
-                    <textarea name="content" id="mytextarea"></textarea>
+                    <textarea x-model="currentPost.content" name="content" id="mytextarea"></textarea>
                 </div>
                 <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded mt-4">Soumettre</button>
             </form>
@@ -100,4 +100,8 @@
     tinymce.init({
         selector: '#mytextarea' // remplacez cette valeur pour cibler un autre textarea
     });
+
+    function updateTinyMCE(content) {
+        tinymce.get('mytextarea').setContent(content);
+    }
 </script>
