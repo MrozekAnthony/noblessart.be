@@ -51,7 +51,11 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware('auth')->controller(
     Route::post('/blog/modifier/{id}', 'updateBlog')->name('updateBlog');
     Route::delete('/blog/supprimer/{id}', 'destroyBlog')->name('destroyBlog');
     Route::get('/galerie', 'gallery')->name('gallery');
+    Route::post('/galerie/creer', 'createGallery')->name('createGallery');
+    Route::post('/galerie/modifier/{id}', 'updateGallery')->name('updateGallery');
+    Route::delete('/galerie/supprimer/{id}', 'destroyGallery')->name('destroyGallery');
     Route::get('/parametre', 'parameter')->name('parameter');
+    Route::get('/categorie', 'category')->name('category');
     Route::get('/utilisateur', 'user')->name('user');
     Route::get('deconnexion', function () {
         Auth::logout();

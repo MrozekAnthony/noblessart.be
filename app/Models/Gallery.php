@@ -9,4 +9,9 @@ class Gallery extends Model
 {
     use HasFactory;
     protected $table = 'gallery';
+
+    public function images()
+    {
+        return $this->hasMany(ImageGallery::class);
+    }
 }
