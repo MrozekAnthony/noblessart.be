@@ -72,7 +72,16 @@
                             </div>
                         </div>
                     @empty
-                        <p>No Data</p>
+                        <div class="flex flex-col items-center justify-center h-64 mx-auto">
+                            <img src="{{ asset('image/Oops.svg') }}" alt="Empty blog" class="w-32 h-21 opacity-70">
+                            <!-- Optionnel : Vous pouvez ajouter une icône ou une illustration représentative -->
+                            <p class="text-gray-600 text-center">Il semble qu'aucun article ne soit disponible pour le
+                                moment.</p>
+                            <button @click="openModal=true;"
+                                class="mt-4 px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600">
+                                Ajouter un article
+                            </button>
+                        </div>
                     @endforelse
                 </div>
             </div>

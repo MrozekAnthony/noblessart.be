@@ -94,8 +94,9 @@ class DashboardController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $imageName = microtime(true) . '.' . $image->extension(); // use microtime() instead of time()
-                $imageName = str_replace('.', '', $imageName); // remove any periods from the microtime value to avoid issues
+                //dd($image);
+                $imageName = microtime(true) . '.' . $image->getClientOriginalName(); // use microtime() instead of time()
+                //$imageName = str_replace('.', '', $imageName); // remove any periods from the microtime value to avoid issues
                 $image->move(public_path('gallery'), $imageName);
 
                 $gallery_images = new ImageGallery();
@@ -110,15 +111,10 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.gallery');
     }
 
-
-
-    public function updateGallery(Request $request, $id)
+    public function destroyGallery($id)
     {
         $gallery = Gallery::find($id);
-        $gallery->title = $request->title;
-        $gallery->slug = str_replace(' ', '-', strtolower($request->title));
-        $gallery->updated_by = Auth::id();
-        $gallery->save();
+        $gallery->delete();
         return redirect()->route('dashboard.gallery');
     }
 

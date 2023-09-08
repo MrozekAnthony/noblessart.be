@@ -163,7 +163,6 @@
     <div class="w-screen mx-auto">
         @yield('content')
     </div>
-
 </body>
 
 <footer class="bg-[#1f1f1e] bg-[url('{{ asset('image/flowers.svg') }}')] text-white text-center text-md">
