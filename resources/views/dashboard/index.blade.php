@@ -43,7 +43,7 @@
                         @elseif($tab == 'gallery')
                             <x-gallery :galleries="$galleries"></x-gallery>
                         @elseif($tab == 'user')
-                            <x-user :users="$users"></x-user>
+                            <x-user :users="$users" :roles="$roles"></x-user>
                         @elseif($tab == 'parameter')
                             <x-parameter></x-parameter>
                             {{-- <x-parameter :parameters="$parameters"></x-parameter> --}}

@@ -10,6 +10,7 @@ use App\Models\Gallery;
 use App\Models\Parameter;
 use App\Models\Category;
 use App\Models\ImageGallery;
+use App\Models\Role;
 
 class DashboardController extends Controller
 {
@@ -127,12 +128,66 @@ class DashboardController extends Controller
     public function user()
     {
         return view('dashboard.index', ['tab' => 'user'])
-            ->with('users', User::all());
+            ->with('users', User::all())
+            ->with('roles', Role::all());
+    }
+
+    public function createUser(Request $request)
+    {
+        //dd($request->all());
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role_id = $request->role_id;
+        $user->save();
+        return redirect()->route('dashboard.user');
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return redirect()->route('dashboard.user')->with('error', 'Utilisateur non trouvé');
+        }
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password)
+            $user->password = bcrypt($request->password);
+        $user->role_id = $request->role_id;
+        $user->save();
+        return redirect()->route('dashboard.user');
+    }
+
+    public function destroyUser($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('dashboard.user');
     }
 
     public function category()
     {
         return view('dashboard.index', ['tab' => 'category'])
             ->with('categories', Category::all());
+    }
+
+    public function createCategory(Request $request)
+    {
+        $category = new Category();
+        $category->name = $request->name;
+        $category->slug = str_replace(' ', '-', strtolower($request->name));
+        $category->image = $request->image;
+        $category->created_by = Auth::id();
+        $category->updated_by = Auth::id();
+        $category->save();
+        return redirect()->route('dashboard.category');
+    }
+
+    public function destroyCategory($id)
+    {
+        $category = Category::find($id);
+        $category->delete();
+        return redirect()->route('dashboard.category');
     }
 }

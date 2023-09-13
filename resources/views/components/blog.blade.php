@@ -39,12 +39,8 @@
                                 <img class="h-64 md:h-48 lg:h-36 w-full object-center object-cover"
                                     src="{{ $post->image ? asset($post->image) : 'https://dummyimage.com/720x400' }}"
                                     alt="blog">
-
-
-
-
                                 <button
-                                    @click="openModal=true; isEdit=true; currentPost = { 
+                                    @click="openModal=true; isEdit=true; currentPost { 
                                     id: '{{ $post->id }}', 
                                     title: '{{ $post->title }}', 
                                     content: '{{ $post->content }}', 

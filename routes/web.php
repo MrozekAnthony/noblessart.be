@@ -56,6 +56,9 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware('auth')->controller(
     Route::get('/parametre', 'parameter')->name('parameter');
     Route::get('/categorie', 'category')->name('category');
     Route::get('/utilisateur', 'user')->name('user');
+    Route::post('/utilisateur/creer', 'createUser')->name('createUser');
+    Route::delete('/utilisateur/supprimer/{id}', 'destroyUser')->name('destroyUser');
+    Route::post('/utilisateur/modifier/{id}', 'updateUser')->name('updateUser');
     Route::get('deconnexion', function () {
         Auth::logout();
         return redirect()->route('/');
