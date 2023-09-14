@@ -6,6 +6,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ThreadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,14 @@ Route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(
     ])->name('show');
 });
 
+Route::prefix('/forum')->name('thread.')->controller(ThreadController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/{slug}-{id}', 'show')->where([
+        'id' => '[0-9]+',
+        'slug' => '[a-z0-9]+(-[a-z0-9]+)*'
+    ])->name('show');
+});
+
 Route::prefix('/dashboard')->name('dashboard.')->middleware('auth')->controller(DashboardController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/blog', 'blog')->name('blog');
@@ -55,6 +64,9 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware('auth')->controller(
     Route::delete('/galerie/supprimer/{id}', 'destroyGallery')->name('destroyGallery');
     Route::get('/parametre', 'parameter')->name('parameter');
     Route::get('/categorie', 'category')->name('category');
+    Route::post('/categorie/creer', 'createCategory')->name('createCategory');
+    Route::delete('/categorie/supprimer/{id}', 'destroyCategory')->name('destroyCategory');
+    Route::post('/categorie/modifier/{id}', 'updateCategory')->name('updateCategory');
     Route::get('/utilisateur', 'user')->name('user');
     Route::post('/utilisateur/creer', 'createUser')->name('createUser');
     Route::delete('/utilisateur/supprimer/{id}', 'destroyUser')->name('destroyUser');

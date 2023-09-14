@@ -46,22 +46,23 @@
                                                     <img src="{{ asset($image->image) }}" alt="image in gallery"
                                                         class="w-64 h-64">
                                                 </div>
+                                                <!-- Previous Button -->
+                                                <button @click="prevSlide({{ count($image) }})"
+                                                    class="absolute top-1/2 left-0 z-10 bg-white bg-opacity-50 px-2 py-1 rounded-r-lg focus:outline-none">
+                                                    ‹
+                                                </button>
+
+                                                <!-- Next Button -->
+                                                <button @click="nextSlide({{ count($image) }})"
+                                                    class="absolute top-1/2 right-0 z-10 bg-white bg-opacity-50 px-2 py-1 rounded-l-lg focus:outline-none">
+                                                    ›
+                                                </button>
+
                                             @empty
                                                 nodata
                                             @endforelse
                                         </div>
 
-                                        <!-- Previous Button -->
-                                        <button @click="prevSlide()"
-                                            class="absolute top-1/2 left-0 z-10 bg-white bg-opacity-50 px-2 py-1 rounded-r-lg focus:outline-none">
-                                            ‹
-                                        </button>
-
-                                        <!-- Next Button -->
-                                        <button @click="nextSlide()"
-                                            class="absolute top-1/2 right-0 z-10 bg-white bg-opacity-50 px-2 py-1 rounded-l-lg focus:outline-none">
-                                            ›
-                                        </button>
 
                                     </div>
                                 </div>
@@ -139,13 +140,14 @@
         function carousel() {
             return {
                 activeIndex: 0,
-                nextSlide() {
-                    if (this.activeIndex < {{ count($gallery->images) }} - 1) this.activeIndex++;
-                },
-                prevSlide() {
-                    if (this.activeIndex > 0) this.activeIndex--;
-                }
+                nextSlide(nbImage = 0) {
+                    if (this.activeIndex < nbImage
+                    } - 1) this.activeIndex++;
+            },
+            prevSlide() {
+                if (this.activeIndex > 0) this.activeIndex--;
             }
+        }
         }
     </script>
 </div>

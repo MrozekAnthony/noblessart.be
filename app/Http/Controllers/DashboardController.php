@@ -35,6 +35,11 @@ class DashboardController extends Controller
         $post = new Post();
         $post->title = $request->title;
         $post->slug = str_replace(' ', '-', strtolower($request->title));
+        $searchPost = Post::where('slug', $post->slug)->first();
+        if ($searchPost) {
+            $post->slug = $post->slug . '-' . time();
+        }
+
         $post->content = $request->content;
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
@@ -58,6 +63,11 @@ class DashboardController extends Controller
         }
         $post->title = $request->title;
         $post->slug = str_replace(' ', '-', strtolower($request->title));
+        $searchPost = Post::where('slug', $post->slug)->first();
+        if ($searchPost) {
+            $post->slug = $post->slug . '-' . time();
+        }
+
         $post->content = $request->content;
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
@@ -89,6 +99,10 @@ class DashboardController extends Controller
         $gallery = new Gallery();
         $gallery->title = $request->title;
         $gallery->slug = str_replace(' ', '-', strtolower($request->title));
+        $searchGallery = Gallery::where('slug', $gallery->slug)->first();
+        if ($searchGallery) {
+            $gallery->slug = $gallery->slug . '-' . time();
+        }
         $gallery->created_by = Auth::id();
         $gallery->updated_by = Auth::id();
         $gallery->save();
@@ -138,8 +152,17 @@ class DashboardController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $searchUser = User::where('email', $user->email)->first();
+        if ($searchUser) {
+            return redirect()->route('dashboard.user')->with('error', 'Email déjà utilisé');
+        }
         $user->password = bcrypt($request->password);
         $user->role_id = $request->role_id;
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('user'), $imageName);
+            $user->image = 'user/' . $imageName;
+        }
         $user->save();
         return redirect()->route('dashboard.user');
     }
@@ -152,8 +175,17 @@ class DashboardController extends Controller
         }
         $user->name = $request->name;
         $user->email = $request->email;
+        $searchUser = User::where('email', $user->email)->first();
+        if ($searchUser and $searchUser->id != $user->id) {
+            return redirect()->route('dashboard.user')->with('error', 'Email déjà utilisé');
+        }
         if ($request->password)
             $user->password = bcrypt($request->password);
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('user'), $imageName);
+            $user->image = 'user/' . $imageName;
+        }
         $user->role_id = $request->role_id;
         $user->save();
         return redirect()->route('dashboard.user');
@@ -162,6 +194,9 @@ class DashboardController extends Controller
     public function destroyUser($id)
     {
         $user = User::find($id);
+        if (Auth::user()->role->priority < $user->role->priority) {
+            return redirect()->route('dashboard.user')->with('error', 'Impossible de supprimer l\'administrateur');
+        }
         $user->delete();
         return redirect()->route('dashboard.user');
     }
@@ -180,6 +215,11 @@ class DashboardController extends Controller
         $category->image = $request->image;
         $category->created_by = Auth::id();
         $category->updated_by = Auth::id();
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('category'), $imageName);
+            $category->image = 'category/' . $imageName;
+        }
         $category->save();
         return redirect()->route('dashboard.category');
     }
@@ -187,6 +227,9 @@ class DashboardController extends Controller
     public function destroyCategory($id)
     {
         $category = Category::find($id);
+        if ($category->posts->count() > 0) {
+            return redirect()->route('dashboard.category')->with('error', 'Catégorie non vide');
+        }
         $category->delete();
         return redirect()->route('dashboard.category');
     }

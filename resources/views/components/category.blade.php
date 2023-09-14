@@ -37,22 +37,14 @@
                                     src="{{ $category->image ? asset($category->image) : 'https://dummyimage.com/720x400' }}"
                                     alt="blog">
 
-                                <button
-                                    @click="openModal=true; isEdit=true; currentCategory { 
-                                    id: '{{ $category->id }}', 
-                                    name: '{{ $category->name }}',
-                                    image: '{{ $category->image }}'
-                                };
-                                    class="absolute
-                                    top-2 right-2 bg-white p-2 rounded-full hover:bg-gray-200">
-                                    <img src="{{ asset('image/crayon.svg') }}" alt="Éditer"
-                                        class="w-8 h-8 object-cover object-center">
-                                </button>
-
                                 <div class="p-6">
                                     <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
                                         {{ $category->name ?? '' }}
                                     </h1>
+                                    <button @click="confirmDelete({{ $category->id }})"
+                                        class="text-red-500 hover:text-red-700">
+                                        <img src="{{ asset('image/crayon.svg') }}" alt="trash icon" class="w-8 h-8">
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +69,7 @@
             <div @click.away="openModal = false"
                 class="bg-white w-2/3 rounded shadow-lg p-8 m-4 max-h-screen overflow-y-auto text-center">
                 <div x-show="isEdit">
-                    <button @click="confirmDelete(currentPost.id)" class="text-red-500 hover:text-red-700">
+                    <button @click="confirmDelete(currentCategory.id)" class="text-red-500 hover:text-red-700">
                         Supprimer ?<img src="{{ asset('image/logo.svg') }}" alt="aaa" class="w-16 h-16">
                     </button>
                 </div>

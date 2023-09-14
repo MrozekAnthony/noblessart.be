@@ -93,6 +93,7 @@
                     <a href="/" class="text-black hover:underline">Home</a>
                     <a href="/blog" class="text-black hover:underline">Blog</a>
                     <a href="/galerie" class="text-black hover:underline">Galeries</a>
+                    <a href="/forum" class="text-black hover:underline">Forum</a>
                 </div>
             </div>
 

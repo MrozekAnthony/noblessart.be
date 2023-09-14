@@ -10,11 +10,11 @@ class BlogController extends Controller
 {
     public function index(): View
     {
-        return view('blog.index');
+        return view('blog.index')->with('posts', Post::all());
     }
 
     public function show($slug, $id): View
     {
-        return view('blog.show');
+        return view('blog.show')->with('post', Post::findOrFail($id));
     }
 }
