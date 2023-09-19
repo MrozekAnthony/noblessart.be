@@ -127,6 +127,7 @@
             <a href="/" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Home</a>
             <a href="/blog" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Blog</a>
             <a href="/galerie" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Galeries</a>
+            <a href="/forum" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Forum</a>
             <a href="/abonnement" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Tarifs</a>
             <a href="/mentions-legales" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Mentions
                 légales</a>

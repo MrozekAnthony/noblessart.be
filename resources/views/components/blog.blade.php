@@ -40,7 +40,7 @@
                                     src="{{ $post->image ? asset($post->image) : 'https://dummyimage.com/720x400' }}"
                                     alt="blog">
                                 <button
-                                    @click="openModal=true; isEdit=true; currentPost { 
+                                    @click="openModal=true; isEdit=true; currentPost = { 
                                     id: '{{ $post->id }}', 
                                     title: '{{ $post->title }}', 
                                     content: '{{ $post->content }}', 
@@ -100,7 +100,7 @@
                     <div class="mb-4">
                         <label for="image" class="block text-sm font-bold mb-2">Image:</label>
                         <input type="file" name="image" class="w-full p-2 border rounded">
-                        <img x-show="currentPost.image" :src={{ asset('currentPost.image') }} class="mt-4 w-48">
+                        <img x-show="currentPost.image" :src="'../' + currentPost.image" class="mt-4 w-48">
                     </div>
 
                     <div class="mb-4">

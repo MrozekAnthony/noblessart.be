@@ -19,6 +19,8 @@
                                 class="{{ $tab === 'user' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Utilisateurs</a>
                             <a href="/dashboard/categorie"
                                 class="{{ $tab === 'category' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Catégories</a>
+                            <a href="/dashboard/forum"
+                                class="{{ $tab === 'forum' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Forum</a>
                             <a href="/dashboard/parametre"
                                 class="{{ $tab === 'parameter' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Paramètres</a>
                             <form action="{{ route('auth.logout') }}" method="post"
@@ -44,6 +46,8 @@
                             <x-gallery :galleries="$galleries"></x-gallery>
                         @elseif($tab == 'user')
                             <x-user :users="$users" :roles="$roles"></x-user>
+                        @elseif($tab == 'forum')
+                            <x-forum :threads="$threads"></x-forum>
                         @elseif($tab == 'parameter')
                             <x-parameter></x-parameter>
                             {{-- <x-parameter :parameters="$parameters"></x-parameter> --}}

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamp('closed_at')->nullable(); // Date de fermeture du thread
             $table->timestamp('pinned_at')->nullable(); // Date d'épinglage du thread
             $table->timestamp('published_at')->nullable(); // Date de publication du thread
-            $table->foreignId('category_id')->constrained('threads_category');
+            $table->foreignId('thread_category_id')->constrained('thread_category');
             $table->timestamps();
         });
     }

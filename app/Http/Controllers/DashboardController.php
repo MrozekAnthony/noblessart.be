@@ -11,6 +11,7 @@ use App\Models\Parameter;
 use App\Models\Category;
 use App\Models\ImageGallery;
 use App\Models\Role;
+use App\Models\Thread;
 
 class DashboardController extends Controller
 {
@@ -232,5 +233,33 @@ class DashboardController extends Controller
         }
         $category->delete();
         return redirect()->route('dashboard.category');
+    }
+
+    public function forum()
+    {
+        return view('dashboard.index', ['tab' => 'forum'])->with('threads', Thread::all());
+    }
+
+    public function createForum(Request $request)
+    {
+        $thread = new Thread();
+        $thread->title = $request->title;
+        $thread->slug = str_replace(' ', '-', strtolower($request->title));
+        $searchThread = Thread::where('slug', $thread->slug)->first();
+        if ($searchThread) {
+            $thread->slug = $thread->slug . '-' . time();
+        }
+        $thread->content = $request->content;
+        $thread->created_by = Auth::id();
+        $thread->updated_by = Auth::id();
+        $thread->save();
+        return redirect()->route('dashboard.forum');
+    }
+
+    public function destroyForum($id)
+    {
+        $thread = Thread::find($id);
+        $thread->delete();
+        return redirect()->route('dashboard.forum');
     }
 }

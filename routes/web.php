@@ -7,6 +7,8 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ThreadController;
+use App\Models\Gallery;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +35,9 @@ Route::get('/', function () {
         'https://picsum.photos/id/10/500/500',
         // ... other images
     ];
-    return view('welcome', ['images' => $images, 'slideIndex' => 1]);
+    return view('welcome', ['images' => $images, 'slideIndex' => 1])
+        ->with('galleries', Gallery::all())
+        ->with('posts', Post::all());
 });
 
 Route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(function () {
@@ -50,6 +54,12 @@ Route::prefix('/forum')->name('thread.')->controller(ThreadController::class)->g
         'id' => '[0-9]+',
         'slug' => '[a-z0-9]+(-[a-z0-9]+)*'
     ])->name('show');
+    Route::get('/creer', 'create')->name('create');
+    Route::post('/creer', 'doCreate')->name('doCreate');
+    Route::delete('/{slug}-{id}', 'destroy')->where([
+        'id' => '[0-9]+',
+        'slug' => '[a-z0-9]+(-[a-z0-9]+)*'
+    ])->name('destroyPost');
 });
 
 Route::prefix('/dashboard')->name('dashboard.')->middleware('auth')->controller(DashboardController::class)->group(function () {
@@ -71,6 +81,11 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware('auth')->controller(
     Route::post('/utilisateur/creer', 'createUser')->name('createUser');
     Route::delete('/utilisateur/supprimer/{id}', 'destroyUser')->name('destroyUser');
     Route::post('/utilisateur/modifier/{id}', 'updateUser')->name('updateUser');
+    Route::get('/forum', 'forum')->name('forum');
+    Route::post('/forum/creer', 'createForum')->name('createForum');
+    Route::delete('/forum/supprimer/{id}', 'destroyForum')->name('destroyForum');
+    Route::post('/forum/modifier/{id}', 'updateForum')->name('updateForum');
+
     Route::get('deconnexion', function () {
         Auth::logout();
         return redirect()->route('/');
