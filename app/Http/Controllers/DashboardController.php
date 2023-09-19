@@ -17,6 +17,25 @@ use App\Models\SeverityLevel;
 
 class DashboardController extends Controller
 {
+
+    function removeAccents($string) {
+        $accents = array(
+            'À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï',
+            'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'ß', 'à', 'á',
+            'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò',
+            'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ'
+        );
+    
+        $replace = array(
+            'A', 'A', 'A', 'A', 'A', 'A', 'AE', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I',
+            'D', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y', 's', 'a', 'a',
+            'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o',
+            'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y'
+        );
+    
+        return str_replace($accents, $replace, $string);
+    }
+
     public function index()
     {
         return view('dashboard.index', ['tab' => 'dashboard']);
@@ -24,8 +43,6 @@ class DashboardController extends Controller
 
     public function blog()
     {
-        // dd(Post::all());
-        // return view('dashboard.index', ['tab' => 'blog', 'posts' => Post::all()]);
         return view('dashboard.index', ['tab' => 'blog'])
             ->with('posts', Post::with('category')->get())
             ->with('categories', Category::all());
@@ -37,7 +54,7 @@ class DashboardController extends Controller
 
         $post = new Post();
         $post->title = $request->title;
-        $post->slug = str_replace(' ', '-', strtolower($request->title));
+        $post->slug = str_replace(' ', '-', strtolower(removeAccents($request->title)));
         $searchPost = Post::where('slug', $post->slug)->first();
         if ($searchPost) {
             $post->slug = $post->slug . '-' . time();
@@ -46,8 +63,8 @@ class DashboardController extends Controller
         $post->content = $request->content;
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('blog'), $imageName);
-            $post->image = 'blog/' . $imageName;
+            $request->image->move(public_path('article'), $imageName);
+            $post->image = 'article/' . $imageName;
         }
 
         $post->is_published = $request->is_published || false;
@@ -65,7 +82,7 @@ class DashboardController extends Controller
             return redirect()->route('dashboard.blog')->with('error', 'Galerie non trouvée');
         }
         $post->title = $request->title;
-        $post->slug = str_replace(' ', '-', strtolower($request->title));
+        $post->slug = str_replace(' ', '-', strtolower(removeAccents($request->title)));
         $searchPost = Post::where('slug', $post->slug)->first();
         if ($searchPost) {
             $post->slug = $post->slug . '-' . time();

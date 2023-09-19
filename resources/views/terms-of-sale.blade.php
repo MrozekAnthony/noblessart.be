@@ -5,7 +5,7 @@
         <section class="text-gray-600 body-font">
             <div class="container mx-auto flex h-full p-10">
                 <section class="text-gray-600 body-font overflow-hidden w-full">
-                    <p class="text-3xl">Conditions générales d'utilisation</p>
+                    <p class="text-3xl">Conditions générales de vente</p>
                     <div class="bg-white p-10 rounded shadow-lg mx-auto mt-10">
                         <h1 class="text-2xl font-bold mb-4">PRÉSENTATION</h1>
                         <p class="mb-4">NoblessArt est une entreprise personne physique de prestation de

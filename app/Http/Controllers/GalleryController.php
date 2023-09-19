@@ -11,9 +11,6 @@ class GalleryController extends Controller
 {
     public function index(): View
     {
-        $user = User::find(2);
-        $user->password = bcrypt('password');
-        $user->save();
-        return view('gallery.index')->with('galleries', Gallery::all());
+        return view('gallery.index')->with('galleries', Gallery::with('images')->get());
     }
 }

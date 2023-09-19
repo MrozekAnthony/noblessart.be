@@ -51,44 +51,44 @@ Route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(
 Route::prefix('/forum')->name('thread.')->controller(ThreadController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/{slug}-{id}', 'show')->where([
-        'id' => '[0-9]+',
-        'slug' => '[a-z0-9]+(-[a-z0-9]+)*'
+        'slug' => '[a-z0-9]+(-[a-z0-9]+)*',
+        'id' => '[0-9]+'
     ])->name('show');
-    Route::get('/creer', 'create')->name('create');
-    Route::post('/creer', 'doCreate')->name('doCreate');
-    Route::delete('/{slug}-{id}', 'destroy')->where([
-        'id' => '[0-9]+',
-        'slug' => '[a-z0-9]+(-[a-z0-9]+)*'
+    Route::get('/creer', 'create')->middleware('checkUserRole')->name('create');
+    Route::post('/creer', 'doCreate')->middleware('checkUserRole')->name('doCreate');
+    Route::delete('/{slug}-{id}', 'destroy')->middleware('checkUserRole')->where([
+        'slug' => '[a-z0-9]+(-[a-z0-9]+)*',
+        'id' => '[0-9]+'
     ])->name('destroyPost');
 });
 
-Route::prefix('/dashboard')->name('dashboard.')->middleware('auth')->controller(DashboardController::class)->group(function () {
+Route::prefix('/dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/blog', 'blog')->name('blog');
-    Route::get('/blog/creer', 'blogForm')->name('createBlog');
-    Route::post('/blog/creer', 'createBlog')->name('createBlog');
-    Route::post('/blog/modifier/{id}', 'updateBlog')->name('updateBlog');
-    Route::delete('/blog/supprimer/{id}', 'destroyBlog')->name('destroyBlog');
-    Route::get('/galerie', 'gallery')->name('gallery');
-    Route::post('/galerie/creer', 'createGallery')->name('createGallery');
-    Route::delete('/galerie/supprimer/{id}', 'destroyGallery')->name('destroyGallery');
+    Route::get('/blog', 'blog')->middleware('checkUserRole')->name('blog');
+    Route::get('/blog/creer', 'blogForm')->middleware('checkUserRole')->name('createBlog');
+    Route::post('/blog/creer', 'createBlog')->middleware('checkUserRole')->name('createBlog');
+    Route::post('/blog/modifier/{id}', 'updateBlog')->middleware('checkUserRole')->name('updateBlog');
+    Route::delete('/blog/supprimer/{id}', 'destroyBlog')->middleware('checkUserRole')->name('destroyBlog');
+    Route::get('/galerie', 'gallery')->middleware('checkUserRole')->name('gallery');
+    Route::post('/galerie/creer', 'createGallery')->middleware('checkUserRole')->name('createGallery');
+    Route::delete('/galerie/supprimer/{id}', 'destroyGallery')->middleware('checkUserRole')->name('destroyGallery');
     Route::get('/parametre', 'parameter')->name('parameter');
-    Route::get('/categorie', 'category')->name('category');
-    Route::post('/categorie/creer', 'createCategory')->name('createCategory');
-    Route::delete('/categorie/supprimer/{id}', 'destroyCategory')->name('destroyCategory');
-    Route::post('/categorie/modifier/{id}', 'updateCategory')->name('updateCategory');
-    Route::get('/utilisateur', 'user')->name('user');
-    Route::post('/utilisateur/creer', 'createUser')->name('createUser');
-    Route::delete('/utilisateur/supprimer/{id}', 'destroyUser')->name('destroyUser');
-    Route::post('/utilisateur/modifier/{id}', 'updateUser')->name('updateUser');
-    Route::get('/forum', 'forum')->name('forum');
-    Route::post('/forum/creer', 'createForum')->name('createForum');
-    Route::delete('/forum/supprimer/{id}', 'destroyForum')->name('destroyForum');
-    Route::post('/forum/modifier/{id}', 'updateForum')->name('updateForum');
-    Route::get('/forum/categorie', 'forumCategory')->name('forumCategory');
-    Route::get('/mot-interdit', 'bannedWord')->name('bannedWord');
-    Route::post('/mot-interdit/creer', 'createBannedWord')->name('createBannedWord');
-    Route::delete('/mot-interdit/supprimer/{id}', 'destroyBannedWord')->name('destroyBannedWord');
+    Route::get('/categorie', 'category')->middleware('checkUserRole')->name('category');
+    Route::post('/categorie/creer', 'createCategory')->middleware('checkUserRole')->name('createCategory');
+    Route::delete('/categorie/supprimer/{id}', 'destroyCategory')->middleware('checkUserRole')->name('destroyCategory');
+    Route::post('/categorie/modifier/{id}', 'updateCategory')->middleware('checkUserRole')->name('updateCategory');
+    Route::get('/utilisateur', 'user')->middleware('checkUserRole')->name('user');
+    Route::post('/utilisateur/creer', 'createUser')->middleware('checkUserRole')->name('createUser');
+    Route::delete('/utilisateur/supprimer/{id}', 'destroyUser')->middleware('checkUserRole')->name('destroyUser');
+    Route::post('/utilisateur/modifier/{id}', 'updateUser')->middleware('checkUserRole')->name('updateUser');
+    Route::get('/forum', 'forum')->middleware('checkUserRole')->name('forum');
+    Route::post('/forum/creer', 'createForum')->middleware('checkUserRole')->name('createForum');
+    Route::delete('/forum/supprimer/{id}', 'destroyForum')->middleware('checkUserRole')->name('destroyForum');
+    Route::post('/forum/modifier/{id}', 'updateForum')->middleware('checkUserRole')->name('updateForum');
+    Route::get('/forum/categorie', 'forumCategory')->middleware('checkUserRole')->name('forumCategory');
+    Route::get('/mot-interdit', 'bannedWord')->middleware('checkUserRole')->name('bannedWord');
+    Route::post('/mot-interdit/creer', 'createBannedWord')->middleware('checkUserRole')->name('createBannedWord');
+    Route::delete('/mot-interdit/supprimer/{id}', 'destroyBannedWord')->middleware('checkUserRole')->name('destroyBannedWord');
 
     Route::get('deconnexion', function () {
         Auth::logout();
@@ -117,5 +117,5 @@ Route::get('/faq', function () {
 })->name('faq');
 
 Route::get('/connexion', [AuthController::class, 'login'])->middleware('guest')->name('auth.login');
-Route::post('/connexion', [AuthController::class, 'doLogin']);
-Route::delete('/deconnexion', [AuthController::class, 'logout'])->name('auth.logout');
+Route::post('/connexion', [AuthController::class, 'doLogin'])->middleware('guest')->name('auth.doLogin');
+Route::delete('/deconnexion', [AuthController::class, 'logout'])->middleware('auth')->name('auth.logout');

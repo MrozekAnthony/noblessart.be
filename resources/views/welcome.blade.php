@@ -197,7 +197,7 @@
                     </div>
                 </div>
             </div>
-            <p class="text-right">voir d'autre article -></p>
+            <a href="/blog" class="text-right">voir d'autre article -></a>
         </div>
     </div>
     <div class="w-screen left-0">
@@ -259,11 +259,10 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
+            <a href="/galerie" class="text-right">voir d'autre galerie -></a>
         </div>
     </div>
     </div>
-    <script></script>
 @endsection

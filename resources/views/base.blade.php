@@ -133,7 +133,7 @@
                 légales</a>
             <a href="/conditions-generales-de-vente"
                 class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">Conditions générales
-                d'utilisation</a>
+                de vente</a>
             <a href="/faq" class="block hover:bg-gray-600 p-4 border-b text-center w-80 mx-auto">FAQ</a>
 
             <div class="flex-row justify-center items-center h-16 pt-10 w-80 mx-auto">

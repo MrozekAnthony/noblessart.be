@@ -6,29 +6,36 @@
             <div class="container mx-auto flex h-full p-10">
                 <section class="text-gray-600 body-font overflow-hidden">
                     <p class="text-3xl">Mentions légales</p>
-                    <div class="container px-5 py-24 mx-auto">
-                        <div class="lg:w-4/5 mx-auto flex flex-wrap">
-                            <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ipsam corporis ea soluta
-                                    rerum iusto dolorem, tempora modi ut aliquid quam tempore, omnis iste quod, repudiandae
-                                    dolor impedit. Quod, laborum?
-                                    Corrupti at nostrum consequuntur minus, eum accusamus ipsam velit rerum facere et
-                                    mollitia officiis laborum ratione possimus ab, quam eligendi, magnam minima. Officia
-                                    dolorum possimus commodi excepturi repellendus odio voluptates!
-                                    Eveniet rerum, doloribus libero debitis beatae neque facilis veniam porro quis amet
-                                    aspernatur ipsam ex blanditiis nisi exercitationem vitae tempore excepturi sequi eaque
-                                    corrupti repellat eius natus maxime! Nihil, in.
-                                    Doloremque repellendus, consequatur, aspernatur reprehenderit blanditiis quasi eum
-                                    laboriosam harum corrupti quas earum? Ullam, nobis facere! Iure neque quis voluptate
-                                    optio nemo sapiente modi, nesciunt eum excepturi, tempore, libero est.
-                                    Itaque quis veniam, animi ex nemo eos, dolorem at quo optio, sit odio quidem assumenda.
-                                    Voluptate cumque aliquam quidem reprehenderit ullam obcaecati maiores illum corrupti,
-                                    exercitationem pariatur, sed tempora quas?</p>
-                            </div>
-                            <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-                                src="https://dummyimage.com/400x400">
-                        </div>
+
+                    <div class="bg-white p-10 rounded shadow-lg mx-auto mt-10">
+                        <p class="mb-4">NoblessArt est une entreprise personne physique de prestation de
+                            services et de vente, gérée par Santin Enola, qui a entamé le début de ses activités
+                            le 01 mai 2023.</p>
+                        <p class="mb-4">Elle est enregistrée sous le numéro d’entreprise <span
+                                class="font-semibold">0801.330.361</span>, et identifiée à la TVA sous le numéro
+                            <span class="font-semibold">0801.330.361</span>.
+                        </p>
+                        <p class="mb-4">Son siège social se situe à <span class="font-semibold">9, rue
+                                d’Havré, 7000 Mons</span>. Le numéro de compte en banque professionnel est <span
+                                class="font-semibold">BE45 001948486789</span>.</p>
+                        <p class="mb-4">NoblessArt est une entreprise de création dans le graphisme,
+                            spécialisée dans le prépresse, le print et la communication visuelle (identité
+                            graphique et publicité).</p>
+                        <ul class="list-disc pl-5 mb-4">
+                            <li>Site : <a href="http://www.noblessart.be"
+                                    class="text-blue-500 underline">www.noblessart.be</a></li>
+                            <li>Adresse e-mail clientèle : <a href="mailto:contact@noblessart.be"
+                                    class="text-blue-500 underline">contact@noblessart.be</a></li>
+                            <li>Adresse e-mail service après vente classic : <a href="mailto:sav@noblessart.be"
+                                    class="text-blue-500 underline">sav@noblessart.be</a></li>
+                            <li>Adresse e-mail réservé aux abonnés et aux sav premium : <a
+                                    href="mailto:premium@noblessart.be"
+                                    class="text-blue-500 underline">premium@noblessart.be</a></li>
+                            <li>Adresse e-mail contact commercial - fournisseurs : <a href="mailto:commercial@noblessart.be"
+                                    class="text-blue-500 underline">commercial@noblessart.be</a></li>
+                        </ul>
                     </div>
+
                 </section>
             </div>
         </section>
