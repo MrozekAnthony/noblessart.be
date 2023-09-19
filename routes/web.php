@@ -85,6 +85,10 @@ Route::prefix('/dashboard')->name('dashboard.')->middleware('auth')->controller(
     Route::post('/forum/creer', 'createForum')->name('createForum');
     Route::delete('/forum/supprimer/{id}', 'destroyForum')->name('destroyForum');
     Route::post('/forum/modifier/{id}', 'updateForum')->name('updateForum');
+    Route::get('/forum/categorie', 'forumCategory')->name('forumCategory');
+    Route::get('/mot-interdit', 'bannedWord')->name('bannedWord');
+    Route::post('/mot-interdit/creer', 'createBannedWord')->name('createBannedWord');
+    Route::delete('/mot-interdit/supprimer/{id}', 'destroyBannedWord')->name('destroyBannedWord');
 
     Route::get('deconnexion', function () {
         Auth::logout();

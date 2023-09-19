@@ -1,6 +1,6 @@
 @props(['categories'])
 
-@extends('base') <!-- Assurez-vous d'avoir un layout app -->
+@extends('base')
 
 @section('content')
     <div class="max-w-3xl mx-auto mt-6 bg-white p-6 rounded-md shadow-md">

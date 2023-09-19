@@ -10,14 +10,40 @@ use App\Models\BannedWord;
 
 class ThreadController extends Controller
 {
-    public function index(): View
+    public function index(Request $request)
     {
-        return view('forum.index')->with('threads', Thread::all());
+        $threads = Thread::query()
+            ->where('quarantine', false);
+
+        if ($request->filled('title')) {
+            $threads->where('title', 'LIKE', '%' . $request->title . '%');
+        }
+
+        if ($request->filled('author')) {
+            $threads->whereHas('user', function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->author . '%');
+            });
+        }
+
+        if ($request->filled('category')) {
+            $threads->where('thread_category_id', $request->category);
+        }
+
+        return view('forum.index')->with('threads', $threads->get())
+            ->with('categories', ThreadCategory::all());
     }
 
     public function show($slug, $id): View
     {
-        return view('forum.show')->with('threads', Thread::findOrFail($id));
+        $thread = Thread::findOrFail($id);
+        if (!$thread->quarantine) {
+            $thread->views_count = $thread->views_count ? $thread->views_count + 1 : 1;
+            $thread->save();
+            return view('forum.show')->with('thread', Thread::findOrFail($id));
+        }
+        return view('forum.index')->with('threads', Thread::where('quarantine', false)->get())
+        ->with('error', 'Le thread que vous souhaitez voir est en quarantaine');
+
     }
 
     public function create(): View

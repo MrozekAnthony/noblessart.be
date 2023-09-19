@@ -12,6 +12,8 @@ use App\Models\Category;
 use App\Models\ImageGallery;
 use App\Models\Role;
 use App\Models\Thread;
+use App\Models\BannedWord;
+use App\Models\SeverityLevel;
 
 class DashboardController extends Controller
 {
@@ -130,6 +132,7 @@ class DashboardController extends Controller
     public function destroyGallery($id)
     {
         $gallery = Gallery::find($id);
+        $gallery->images()->delete();
         $gallery->delete();
         return redirect()->route('dashboard.gallery');
     }
@@ -237,7 +240,30 @@ class DashboardController extends Controller
 
     public function forum()
     {
-        return view('dashboard.index', ['tab' => 'forum'])->with('threads', Thread::all());
+        return view('dashboard.index', ['tab' => 'forum'])->with('threads', Thread::where('quarantine', true)->get());
+    }
+
+    public function bannedWord()
+    {
+        return view('dashboard.index', ['tab' => 'banned_word'])
+        ->with('bannedWords', BannedWord::with('severity')->get())
+        ->with('severities', SeverityLevel::all());
+    }
+
+    public function createBannedWord(Request $request)
+    {
+        $bannedWord = new BannedWord();
+        $bannedWord->word = $request->word;
+        $bannedWord->severity_id = $request->severity_id;
+        $bannedWord->save();
+
+        return redirect()->route('dashboard.bannedWord');
+    }
+
+    public function destroyBannedWord($id){
+        $bannedWord = BannedWord::find($id);
+        $bannedWord->delete();
+        return redirect()->route('dashboard.bannedWord');
     }
 
     public function createForum(Request $request)

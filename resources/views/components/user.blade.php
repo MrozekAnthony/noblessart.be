@@ -38,7 +38,7 @@
                         };">
                             <img alt="team"
                                 class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                                src="https://dummyimage.com/80x80">
+                                src="{{ asset($user->image) }}">
                             <div class="flex-grow">
                                 <h2 class="text-gray-900 title-font font-medium">{{ $user->name }}</h2>
                                 <p class="text-gray-500">{{ $user->role->name }}</p>
@@ -77,7 +77,7 @@
                     <div class="mb-4">
                         <label for="image" class="block text-sm font-bold mb-2">Image:</label>
                         <input type="file" name="image" class="w-full p-2 border rounded">
-                        <img x-show="currentUser.image" :src={{ asset('currentUser.image') }} class="mt-4 w-48">
+                        <img x-show="currentUser.image" :src="'../' + currentUser.image" class="mt-4 w-48">
                     </div>
 
                     <div class="mb-4">
