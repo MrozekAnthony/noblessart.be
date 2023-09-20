@@ -19,8 +19,6 @@
                                     </h1>
                                     <p class="leading-relaxed mb-3">
                                         {{ Str::limit(html_entity_decode(strip_tags($post->content)), 100) }}
-
-
                                     </p>
                                     <div class="flex items-center flex-wrap ">
                                         <a href="/blog/{{ $post->slug . '-' . $post->id }}"

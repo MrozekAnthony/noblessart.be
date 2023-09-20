@@ -11,15 +11,18 @@ class Thread extends Model
     use HasFactory;
     protected $table = 'thread';
 
-    // Dans le modèle Thread
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    // Dans le modèle Thread
     public function category()
     {
         return $this->belongsTo(ThreadCategory::class, 'thread_category_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(CommentThread::class, 'thread_id')->whereNull('parent_comment_id');
     }
 }

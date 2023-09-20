@@ -76,6 +76,7 @@ class ThreadController extends Controller
         }
 
         $thread->save();
-        return view('forum.show');
+        return view('forum.index')->with('threads', Thread::where('quarantine', false)->get())
+        ->with('categories', ThreadCategory::all());
     }
 }

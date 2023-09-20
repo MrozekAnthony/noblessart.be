@@ -14,4 +14,14 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(CommentPost::class, 'post_id')->whereNull('parent_id');
+    }
+
+    public function allComments()
+    {
+        return $this->hasMany(CommentPost::class, 'post_id');
+    }
 }

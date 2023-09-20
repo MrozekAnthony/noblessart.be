@@ -39,13 +39,14 @@ Route::get('/', function () {
         ->with('galleries', Gallery::all())
         ->with('posts', Post::all());
 });
-
 Route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/{slug}-{id}', 'show')->where([
         'id' => '[0-9]+',
         'slug' => '[a-z0-9]+(-[a-z0-9]+)*'
     ])->name('show');
+    Route::post('/commentaire/ajouter', 'addComment')->middleware('auth')->name('addComment');
+    Route::delete('/commentaire/supprimer/{id}', 'destroyComment')->middleware('checkUserRole')->name('destroyComment');
 });
 
 Route::prefix('/forum')->name('thread.')->controller(ThreadController::class)->group(function () {
