@@ -64,8 +64,8 @@ class ThreadController extends Controller
             $thread->slug = $thread->slug . '-' . time();
         }
         $thread->thread_category_id = $request->input('category_id');
-        $thread->created_by = 2;
-        $thread->updated_by = 2;
+        $thread->created_by = Auth::id();
+        $thread->updated_by = Auth::id();
         $thread->created_at = time();
         $thread->updated_at = time();
 

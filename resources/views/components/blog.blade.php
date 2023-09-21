@@ -43,7 +43,7 @@
                                     @click="openModal=true; isEdit=true; currentPost = { 
                                     id: '{{ $post->id }}', 
                                     title: '{{ $post->title }}', 
-                                    content: '{{ $post->content }}',
+                                    content: '{{ str_replace(["\r", "\n"], '', $post->content) }}',
                                     category_id: '{{ $post->category_id }}',
                                     image: '{{ $post->image }}'
                                     };
