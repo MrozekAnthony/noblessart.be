@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ThreadController;
 use App\Models\Gallery;
 use App\Models\Post;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +21,7 @@ use App\Models\Post;
 */
 
 Route::get('/', function () {
+
     $images = [
         'https://picsum.photos/id/1/500/500',
         'https://picsum.photos/id/2/500/500',
@@ -61,6 +61,8 @@ Route::prefix('/forum')->name('thread.')->controller(ThreadController::class)->g
         'slug' => '[a-z0-9]+(-[a-z0-9]+)*',
         'id' => '[0-9]+'
     ])->name('destroyPost');
+    Route::post('/commentaire/ajouter', 'addComment')->middleware('auth')->name('addComment');
+    Route::delete('/commentaire/supprimer/{id}', 'destroyComment')->middleware('checkUserRole')->name('destroyComment');
 });
 
 Route::prefix('/dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {

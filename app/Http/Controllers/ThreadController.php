@@ -7,6 +7,8 @@ use App\Models\ThreadCategory;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\BannedWord;
+use App\Models\CommentThread;
+use Illuminate\Support\Facades\Auth;
 
 class ThreadController extends Controller
 {
@@ -78,5 +80,24 @@ class ThreadController extends Controller
         $thread->save();
         return view('forum.index')->with('threads', Thread::where('quarantine', false)->get())
         ->with('categories', ThreadCategory::all());
+    }
+
+    public function addComment(Request $request)
+    {
+        $post = Thread::findOrFail($request->thread_id);
+        $comment = new CommentThread();
+        $comment->comment = $request->content;
+        $comment->user_id = Auth::id();
+        $comment->thread_id = $request->thread_id;
+        $comment->parent_id = $request->comment_id;
+        $comment->save();
+        return redirect()->route('forum.show', ['slug' => $thread->slug, 'id' => $thread->id]);
+    }
+
+    public function destroyComment($id)
+    {
+        $comment = CommentThread::findOrFail($id);
+        $comment->delete();
+        return redirect()->back();
     }
 }

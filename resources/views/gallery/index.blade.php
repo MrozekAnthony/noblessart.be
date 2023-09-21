@@ -2,10 +2,16 @@
 @extends('base')
 
 @section('content')
-    <section class="text-gray-600 body-font">
+    <section class="text-gray-600 body-font w-full mx-auto">
         <h1 class="text-3xl text-center p-5">Liste des Galeries</h1>
 
-        <div class="container px-5 py-24 bg-white mx-auto">
+        <div class="w-3/5 mx-auto">
+            <!-- LightWidget WIDGET -->
+            <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+            <iframe src="//lightwidget.com/widgets/643acc0faef5544d9ddaed4129a65acb.html" scrolling="no"
+                allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
+        </div>
+        {{-- <div class="container px-5 py-24 bg-white mx-auto">
             <div class="flex flex-wrap -m-4">
                 @forelse($galleries as $gallery)
                     <div class="p-4 lg:w-1/3">
@@ -57,8 +63,9 @@
                 @empty
                 @endforelse
             </div>
-        </div>
+        </div> --}}
     </section>
+
     <script>
         function carousel() {
             return {

@@ -14,13 +14,21 @@
             @click="showForm = !showForm">Répondre</button>
 
         <div x-show="showForm" class="mt-2">
-            <form action="/blog/commentaire/ajouter" method="post">
-                @csrf
+            @if (isset($context) && $context == 'blog')
+                <form action="/blog/commentaire/ajouter" method="post">
+                @elseif(isset($context) && $context == 'forum')
+                    <form action="/forum/commentaire/ajouter" method="post">
+            @endif
+            @csrf
+            @if (isset($context) && $context == 'blog')
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
-                <input type="hidden" name="comment_id" value="{{ $comment->id }}">
-                <textarea name="content" id="content" class="w-full p-2 rounded-md bg-gray-100" placeholder="Votre réponse..."></textarea>
-                <button type="submit"
-                    class="mt-2 px-4 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Envoyer</button>
+            @elseif(isset($context) && $context == 'forum')
+                <input type="hidden" name="thread_id" value="{{ $thread->id }}">
+            @endif
+            <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+            <textarea name="content" id="content" class="w-full p-2 rounded-md bg-gray-100" placeholder="Votre réponse..."></textarea>
+            <button type="submit"
+                class="mt-2 px-4 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Envoyer</button>
             </form>
         </div>
     </div>

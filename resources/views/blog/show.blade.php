@@ -59,7 +59,10 @@
                         <h2 class="text-2xl font-bold">Commentaires ({{ count($post->allComments) }})</h2>
                         <div class="mt-5">
                             @foreach ($post->comments as $comment)
-                                @include('components/comment', ['comment' => $comment])
+                                @include('components/comment', [
+                                    'comment' => $comment,
+                                    'context' => 'blog',
+                                ])
                             @endforeach
                         </div>
                     </div>

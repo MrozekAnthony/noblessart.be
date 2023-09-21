@@ -23,6 +23,11 @@ class Thread extends Model
 
     public function comments()
     {
-        return $this->hasMany(CommentThread::class, 'thread_id')->whereNull('parent_comment_id');
+        return $this->hasMany(CommentThread::class, 'thread_id')->whereNull('parent_id');
+    }
+
+    public function allComments()
+    {
+        return $this->hasMany(CommentThread::class, 'thread_id');
     }
 }
