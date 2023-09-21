@@ -43,15 +43,15 @@
                                     @click="openModal=true; isEdit=true; currentPost = { 
                                     id: '{{ $post->id }}', 
                                     title: '{{ $post->title }}', 
-                                    content: '{{ $post->content }}', 
-                                    category_id: '{{ $post->category_id }}', 
-                                    image: '{{ $post->image }}' 
-                                };
-                                setTimeout(() => {
+                                    content: '{{ $post->content }}',
+                                    category_id: '{{ $post->category_id }}',
+                                    image: '{{ $post->image }}'
+                                    };
+                                    setTimeout(() => {
                                     if(tinymce.get('content-editor')) {
-                                        tinymce.get('content-editor').setContent(currentPost.content);
+                                    tinymce.get('content-editor').setContent(currentPost.content);
                                     }
-                                }, 100)"
+                                    }, 100)"
                                     class="absolute top-2 right-2 bg-white p-2 rounded-full hover:bg-gray-200">
                                     <img src="{{ asset('image/crayon.svg') }}" alt="Éditer"
                                         class="w-8 h-8 object-cover object-center">

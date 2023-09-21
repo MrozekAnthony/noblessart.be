@@ -54,7 +54,7 @@ class DashboardController extends Controller
 
         $post = new Post();
         $post->title = $request->title;
-        $post->slug = str_replace(' ', '-', strtolower(removeAccents($request->title)));
+        $post->slug = str_replace(' ', '-', strtolower($this->removeAccents($request->title)));
         $searchPost = Post::where('slug', $post->slug)->first();
         if ($searchPost) {
             $post->slug = $post->slug . '-' . time();
@@ -82,7 +82,7 @@ class DashboardController extends Controller
             return redirect()->route('dashboard.blog')->with('error', 'Galerie non trouvée');
         }
         $post->title = $request->title;
-        $post->slug = str_replace(' ', '-', strtolower(removeAccents($request->title)));
+        $post->slug = str_replace(' ', '-', strtolower($this->removeAccents($request->title)));
         $searchPost = Post::where('slug', $post->slug)->first();
         if ($searchPost) {
             $post->slug = $post->slug . '-' . time();
@@ -241,6 +241,9 @@ class DashboardController extends Controller
             $request->image->move(public_path('category'), $imageName);
             $category->image = 'category/' . $imageName;
         }
+        else
+            $category->image = 'category/default.png';
+
         $category->save();
         return redirect()->route('dashboard.category');
     }
