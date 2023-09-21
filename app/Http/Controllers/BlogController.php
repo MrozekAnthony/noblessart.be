@@ -18,7 +18,10 @@ class BlogController extends Controller
 
     public function show($slug, $id): View
     {
-        return view('blog.show')->with('post', Post::findOrFail($id));
+        $post = Post::findOrFail($id);
+        $post->view = $post->view + 1;
+        $post->save();
+        return view('blog.show')->with('post', $post);
     }
 
     public function addComment(Request $request)

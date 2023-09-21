@@ -13,8 +13,8 @@
                                 class="{{ $tab === 'dashboard' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Accueil</a>
                             <a href="/dashboard/blog"
                                 class="{{ $tab === 'blog' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Blog</a>
-                            <a href="/dashboard/galerie"
-                                class="{{ $tab === 'gallery' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Galeries</a>
+                            {{-- <a href="/dashboard/galerie"
+                                class="{{ $tab === 'gallery' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Galeries</a> --}}
                             <a href="/dashboard/utilisateur"
                                 class="{{ $tab === 'user' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Utilisateurs</a>
                             <a href="/dashboard/categorie"
@@ -45,8 +45,8 @@
                             <x-dashboard></x-dashboard>
                         @elseif($tab == 'blog')
                             <x-blog :posts="$posts" :categories="$categories"></x-blog>
-                        @elseif($tab == 'gallery')
-                            <x-gallery :galleries="$galleries"></x-gallery>
+                            {{-- @elseif($tab == 'gallery')
+                            <x-gallery :galleries="$galleries"></x-gallery> --}}
                         @elseif($tab == 'user')
                             <x-user :users="$users" :roles="$roles"></x-user>
                         @elseif($tab == 'forum')

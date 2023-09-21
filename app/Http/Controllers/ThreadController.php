@@ -58,12 +58,12 @@ class ThreadController extends Controller
         $thread = new Thread();
         $thread->title = $request->input('title');
         $thread->content = $request->input('content');
-        $thread->slug = str_replace(' ', '-', strtolower($request->title));
+        $thread->slug = str_replace("'","-",str_replace(' ', '-', strtolower($request->title)));
         $searchThread = Thread::where('slug', $thread->slug)->first();
         if ($searchThread) {
             $thread->slug = $thread->slug . '-' . time();
         }
-        $thread->thread_category_id = 1;
+        $thread->thread_category_id = $request->input('category_id');
         $thread->created_by = 2;
         $thread->updated_by = 2;
         $thread->created_at = time();
