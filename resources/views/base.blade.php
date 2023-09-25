@@ -196,18 +196,18 @@
 
 <footer class="bg-[#1f1f1e] bg-[url('{{ asset('image/flowers.svg') }}')] text-white text-center text-md">
     <div class="container px-5 py-24 mx-auto">
-        <div class="flex flex-wrap -m-4">
-            <div class="p-4 lg:w-1/3">
+        <div class="flex flex-col md:flex-row">
+            <div class="p-4 md:w-full lg:w-1/3">
                 <p>Qui est NoblessArt ?</p>
                 <p>Contact :</p>
                 <p>TVA : BE 0000 000 000</p>
             </div>
-            <div class="p-4 lg:w-1/3">
+            <div class="p-4 md:w-full  lg:w-1/3">
                 <p>Mentions légales</p>
                 <p>Conditions générales d'utilisation</p>
                 <p>FAQ</p>
             </div>
-            <div class="p-4 lg:w-1/3">
+            <div class="p-4 md:w-full  lg:w-1/3">
                 <p>All rights reserved © 2023</p>
                 <p>Designed by noblessart</p>
                 <p>Website Development by Digam</p>

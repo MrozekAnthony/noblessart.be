@@ -6,7 +6,7 @@
             <div class="container px-5 py-24 mx-auto bg-white">
                 <div class="flex flex-wrap -m-4">
                     @forelse ($posts as $post)
-                        <div class="p-4 md:w-1/3">
+                        <div class="p-4 w-full lg:w-1/3">
                             <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                                 <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ asset($post->image) }}"
                                     alt="blog">

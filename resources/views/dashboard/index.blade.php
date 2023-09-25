@@ -1,5 +1,5 @@
 @extends('base')
-
+{{ $tab }}
 @section('content')
     <div class="w-90 mx-auto h-screen overflow-hidden">
         <section class="text-gray-600 body-font">
@@ -11,19 +11,21 @@
                         <nav class="text-center">
                             <a href="/dashboard/"
                                 class="{{ $tab === 'dashboard' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Accueil</a>
-                            <a href="/dashboard/blog"
-                                class="{{ $tab === 'blog' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Blog</a>
-                            {{-- <a href="/dashboard/galerie"
-                                class="{{ $tab === 'gallery' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Galeries</a> --}}
-                            <a href="/dashboard/utilisateur"
-                                class="{{ $tab === 'user' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Utilisateurs</a>
-                            <a href="/dashboard/categorie"
-                                class="{{ $tab === 'category' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Catégories</a>
-                            <a href="/dashboard/forum"
-                                class="{{ $tab === 'forum' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Forum</a>
-                            <a href="/dashboard/mot-interdit"
-                                class="{{ $tab === 'banned_word' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Mots
-                                interdits</a>
+                            @if (Auth::user()->role_id < 4)
+                                <a href="/dashboard/blog"
+                                    class="{{ $tab === 'blog' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Blog</a>
+                                <a href="/dashboard/galerie"
+                                    class="{{ $tab === 'gallery' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Galeries</a>
+                                <a href="/dashboard/utilisateur"
+                                    class="{{ $tab === 'user' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Utilisateurs</a>
+                                <a href="/dashboard/categorie"
+                                    class="{{ $tab === 'category' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Catégories</a>
+                                <a href="/dashboard/mot-interdit"
+                                    class="{{ $tab === 'banned_word' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Mots
+                                    interdits</a>
+                                <a href="/dashboard/forum"
+                                    class="{{ $tab === 'forum' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Forum</a>
+                            @endif
                             {{-- <a href="/dashboard/parametre"
                                 class="{{ $tab === 'parameter' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Paramètres</a> --}}
                             <form action="{{ route('auth.logout') }}" method="post"
@@ -45,8 +47,8 @@
                             <x-dashboard></x-dashboard>
                         @elseif($tab == 'blog')
                             <x-blog :posts="$posts" :categories="$categories"></x-blog>
-                            {{-- @elseif($tab == 'gallery')
-                            <x-gallery :galleries="$galleries"></x-gallery> --}}
+                        @elseif($tab == 'gallery')
+                            <x-gallery :galleries="$galleries"></x-gallery>
                         @elseif($tab == 'user')
                             <x-user :users="$users" :roles="$roles"></x-user>
                         @elseif($tab == 'forum')
