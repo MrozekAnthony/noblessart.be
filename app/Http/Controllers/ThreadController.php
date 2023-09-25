@@ -84,20 +84,29 @@ class ThreadController extends Controller
 
     public function addComment(Request $request)
     {
-        $post = Thread::findOrFail($request->thread_id);
+        $thread = Thread::findOrFail($request->thread_id);
         $comment = new CommentThread();
         $comment->comment = $request->content;
         $comment->user_id = Auth::id();
         $comment->thread_id = $request->thread_id;
         $comment->parent_id = $request->comment_id;
         $comment->save();
-        return redirect()->route('forum.show', ['slug' => $thread->slug, 'id' => $thread->id]);
+        return view('forum.show', ['thread' => $thread]);
     }
 
     public function destroyComment($id)
     {
         $comment = CommentThread::findOrFail($id);
         $comment->delete();
+        return redirect()->back();
+    }
+
+    public function stopQuarantineComment(Request $request)
+    {
+        $id = $request->thread_id;
+        $thread = Thread::findOrFail($id);
+        $thread->quarantine = false;
+        $thread->save();
         return redirect()->back();
     }
 }

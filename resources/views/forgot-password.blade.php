@@ -10,7 +10,7 @@
 
         <!-- Formulaire sur le côté droit -->
         <div class="flex-grow">
-            <form id="loginForm" action="{{ route('auth.login') }}" method="post">
+            <form id="forgotPasswordForm" action="/mot-de-passe-oublie" method="post">
                 @csrf
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-bold mb-2">Email:</label>
@@ -20,20 +20,14 @@
                         <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="mb-4">
-                    <label for="password" class="block text-sm font-bold mb-2">Mot de passe:</label>
-                    <input type="password" name="password" class="w-full p-2 border rounded" required>
-                    @error('password')
-                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                    @enderror
-                </div>
 
                 <div class="mb-4">
-                    <a href="/mot-de-passe-oublie" class="text-sm text-blue-500 hover:text-blue-700">Mot de passe
-                        oublié ?</a>
+                    <p class="text-sm mb-2">Veuillez saisir votre adresse e-mail. Un nouveau mot de passe vous sera assigné.
+                    </p>
                 </div>
 
-                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Se connecter</button>
+                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Réinitialiser le mot de
+                    passe</button>
             </form>
         </div>
 

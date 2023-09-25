@@ -15,16 +15,19 @@
         </thead>
         <tbody>
             @forelse($threads as $thread)
-                <tr>
-                    <td class="py-2 px-4 border">{{ $thread->title }}</td>
-                    <td class="py-2 px-4 border">{{ $thread->user->name }}</td>
-                    <td class="py-2 px-4 border">{{ $thread->content }}</td>
-                    <td class="py-2 px-4 border flex justify-center">
-                        <button class="bg-red-500 text-white px-3 py-1 rounded-full mr-2">Supprimer</button>
-                        <button class="bg-blue-500 text-white px-3 py-1 rounded-full">Quarantaine</button>
-                    </td>
-                </tr>
-
+                <form action="/forum/commentaire/stopquarantaine/{{ $thread->id }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="thread_id" value="{{ $thread->id }}">
+                    <tr>
+                        <td class="py-2 px-4 border">{{ $thread->title }}</td>
+                        <td class="py-2 px-4 border">{{ $thread->user->name }}</td>
+                        <td class="py-2 px-4 border">{{ $thread->content }}</td>
+                        <td class="py-2 px-4 border flex justify-center">
+                            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-full">Retirer de la
+                                quarantaine</button>
+                        </td>
+                    </tr>
+                </form>
             @empty
                 <tr>
                     <td class="py-2 px-4 border text-center" colspan="4">Aucune insulte ✌</td>

@@ -24,8 +24,8 @@
                             <a href="/dashboard/mot-interdit"
                                 class="{{ $tab === 'banned_word' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Mots
                                 interdits</a>
-                            <a href="/dashboard/parametre"
-                                class="{{ $tab === 'parameter' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Paramètres</a>
+                            {{-- <a href="/dashboard/parametre"
+                                class="{{ $tab === 'parameter' ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">Paramètres</a> --}}
                             <form action="{{ route('auth.logout') }}" method="post"
                                 class="text-gray-700 hover:bg-gray-100 px-2 py-1 rounded mb-2 block">
                                 @method('delete')

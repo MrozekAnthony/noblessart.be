@@ -5,6 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeToNoblessartMail;
+use App\Mail\ResetPasswordMail;
+use Illuminate\Support\Str;
+
+
 
 class AuthController extends Controller
 {
@@ -31,5 +39,59 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         return redirect()->route('auth.login');
+    }
+
+    public function register()
+    {
+        return view('register');
+    }
+
+    public function doRegister(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+            'password_confirmation' => 'required|min:8',
+        ]);
+
+        $user = User::create([
+            'role_id' => 4,
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+        ]);
+
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        Mail::to($user->email)->send(new WelcomeToNoblessartMail());
+
+        return redirect()->route('dashboard.index');
+    }
+
+    public function forgotPassword()
+    {
+        return view('forgot-password');
+    }
+
+    public function doForgotPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ]);
+
+        $user = User::where('email', $request->input('email'))->firstOrFail();
+        if($user) {
+            $plainPassword = Str::random(10);
+            $user->password = Hash::make($plainPassword);
+            $user->save();
+            Mail::to($user->email)->send(new ResetPasswordMail($plainPassword));
+            return redirect()->route('auth.login');
+        } else {
+            return redirect()->route('auth.forgotPassword')->withErrors([
+                'email' => 'L\'adresse email ne correspond à aucun compte',
+            ])->onlyInput('email');
+        }
+
     }
 }

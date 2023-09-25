@@ -43,7 +43,7 @@
                                     </h1>
                                     <button @click="confirmDelete({{ $category->id }})"
                                         class="text-red-500 hover:text-red-700">
-                                        <img src="{{ asset('image/crayon.svg') }}" alt="trash icon" class="w-8 h-8">
+                                        Supprimer?
                                     </button>
                                 </div>
                             </div>

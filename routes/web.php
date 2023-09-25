@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ThreadController;
 use App\Models\Gallery;
 use App\Models\Post;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,6 +65,7 @@ Route::prefix('/forum')->name('thread.')->controller(ThreadController::class)->g
     ])->name('destroyPost');
     Route::post('/commentaire/ajouter', 'addComment')->middleware('auth')->name('addComment');
     Route::delete('/commentaire/supprimer/{id}', 'destroyComment')->middleware('checkUserRole')->name('destroyComment');
+    Route::post('/commentaire/stopquarantaine/{id}', 'stopQuarantineComment')->middleware('checkUserRole')->name('stopQuarantineComment');
 });
 
 Route::prefix('/dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
@@ -122,3 +125,28 @@ Route::get('/faq', function () {
 Route::get('/connexion', [AuthController::class, 'login'])->middleware('guest')->name('auth.login');
 Route::post('/connexion', [AuthController::class, 'doLogin'])->middleware('guest')->name('auth.doLogin');
 Route::delete('/deconnexion', [AuthController::class, 'logout'])->middleware('auth')->name('auth.logout');
+
+Route::get('/creer-un-compte', [AuthController::class, 'register'])->middleware('guest')->name('auth.register');
+Route::post('/creer-un-compte', [AuthController::class, 'doRegister'])->middleware('guest')->name('auth.doRegister');
+
+Route::get('/mot-de-passe-oublie', [AuthController::class, 'forgotPassword'])->middleware('guest')->name('auth.forgotPassword');
+Route::post('/mot-de-passe-oublie', [AuthController::class, 'doForgotPassword'])->middleware('guest')->name('auth.doForgotPassword');
+
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+Route::post('/contact', function () {
+
+    $data = request()->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'message' => 'required'
+    ]);
+
+    //dd($data);
+
+    Mail::to("contact@noblessart.be")->cc($data['email'])->send(new ContactMail($data));
+
+    return view('contact')->with('message', 'Votre message a bien été envoyé');
+})->name('contact');

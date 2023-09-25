@@ -112,12 +112,17 @@
             <div class="text-center">
                 <h1 class="text-2xl tracking-wider">noblessart;</h1>
                 <div class="mt-2 space-x-4">
-                    <a href="/" class="text-black hover:underline">Home</a>
-                    <a href="/blog" class="text-black hover:underline">Blog</a>
-                    <a href="/galerie" class="text-black hover:underline">Galeries</a>
-                    <a href="/forum" class="text-black hover:underline">Forum</a>
+                    <a href="/"
+                        class="{{ request()->is('/') ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-black hover:underline">Home</a>
+                    <a href="/blog"
+                        class="{{ request()->is('blog') ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-black hover:underline">Blog</a>
+                    <a href="/galerie"
+                        class="{{ request()->is('galerie') ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-black hover:underline">Galeries</a>
+                    <a href="/forum"
+                        class="{{ request()->is('forum') ? 'border-b-2 border-[#E2D239] border-solid' : '' }} text-black hover:underline">Forum</a>
                 </div>
             </div>
+
 
             @auth
                 <!-- Bouton hamburger à droite -->
@@ -184,7 +189,7 @@
 
 
 
-    <div class="w-screen mx-auto">
+    <div class="w-screen mx-auto min-h-screen">
         @yield('content')
     </div>
 </body>

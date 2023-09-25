@@ -207,7 +207,8 @@ class DashboardController extends Controller
             $request->image->move(public_path('user'), $imageName);
             $user->image = 'user/' . $imageName;
         }
-        $user->role_id = $request->role_id;
+        if($request->role_id)
+            $user->role_id = $request->role_id;
         $user->save();
         return redirect()->route('dashboard.user');
     }
