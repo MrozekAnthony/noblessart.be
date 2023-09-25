@@ -21,7 +21,6 @@ class ContactMail extends Mailable
     public function __construct($data)
     {
         $this->data = $data;
-
     }
 
     /**
@@ -39,12 +38,13 @@ class ContactMail extends Mailable
      */
     public function content(): Content
     {
+        //dd($this->data);
         return new Content(
             view: 'emails.contact',
             with: [
                 'name' => $this->data['name'],
                 'email' => $this->data['email'],
-                'message' => $this->data['message'],
+                'content' => $this->data['content'],
             ],
         );
     }

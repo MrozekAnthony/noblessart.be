@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeToNoblessartMail;
 use App\Mail\ResetPasswordMail;
 use Illuminate\Support\Str;
+use App\Mail\ContactMail;
 
 
 
@@ -93,5 +94,24 @@ class AuthController extends Controller
             ])->onlyInput('email');
         }
 
+    }
+
+    public function doContact(Request $request)
+    {
+        //dd($request->all());
+        $data = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'content' => 'required|string',
+        ]);
+        //$data = $request->request->all();
+
+        //dd($data);
+        $mail = "info@noblessart.be";
+        Mail::to($mail)
+            ->cc($data['email'])
+            ->send(new ContactMail($data));
+
+        return view('contact')->with('message', 'Votre message a bien été envoyé');
     }
 }

@@ -45,7 +45,7 @@
         <p class="email-title">Email:</p>
         <p>{{ $email }}</p>
         <p class="email-title">Message:</p>
-        <p>{{ $message }}</p>
+        <p>{{ $content }}</p>
     </div>
 </body>
 

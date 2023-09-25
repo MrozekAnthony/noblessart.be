@@ -11,6 +11,9 @@ use App\Models\Gallery;
 use App\Models\Post;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Mail;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -136,17 +139,5 @@ Route::post('/mot-de-passe-oublie', [AuthController::class, 'doForgotPassword'])
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
-Route::post('/contact', function () {
 
-    $data = request()->validate([
-        'name' => 'required',
-        'email' => 'required|email',
-        'message' => 'required'
-    ]);
-
-    //dd($data);
-
-    Mail::to("contact@noblessart.be")->cc($data['email'])->send(new ContactMail($data));
-
-    return view('contact')->with('message', 'Votre message a bien été envoyé');
-})->name('contact');
+Route::post('/doContact', [AuthController::class, 'doContact'])->name('doContact');
