@@ -54,19 +54,21 @@
 
 <body>
     <div class="container">
-        <h1>Nouveau mot de passe sur Noblessart</h1>
-        <p>Bonjour,</p>
-        <p>Nous avons réinitialisé votre mot de passe comme vous l'avez demandé. Voici votre nouveau mot de passe:</p>
+        <h1>Veuillez de pas répondre à ce mail !</h1>
+        <p>Bonjour cher utilisateur,</p>
+        <p>Tu as demandé de changer de mot de passe. Voici un code tout frais, tout beau :</p>
 
         <div class="password">{{ $plainPassword }}</div>
 
-        <p>Nous vous recommandons de vous connecter dès maintenant et de modifier ce mot de passe pour quelque chose de
-            plus personnel et sécurisé.</p>
-        <p>Si vous n'avez pas demandé à réinitialiser votre mot de passe, veuillez contacter notre support
-            immédiatement.</p>
+        <p>Tu as quelques minutes pour l’utiliser et changer ton mot de passe afin de sécuriser ton compte ? Pour plus
+            de sécurité, nous te recommandons un mot de passe composés de minuscules, majuscules, chiffres et caractères
+            spéciaux.</p>
+        <p>Ce n’était pas toi ? Informe alors le support au <a
+                href="mailto:contact@noblessart.be">contact@noblessart.be</a> sans plus attendre. Nous ferons tout
+            pour te répondre au plus vite.</p>
 
         <p>Bonne création,</p>
-        <p class="signature">L'équipe Noblessart</p>
+        <p class="signature">Ta chère <i>NoblessArt</i>.</p>
     </div>
 </body>
 

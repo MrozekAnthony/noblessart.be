@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('content')
-    <div class="w-screen left-0 bg-[url('{{ asset('image/background-1.svg') }}')] bg-center">
+    <div class="w-screen left-0 bg-[url('{{ asset('image/firstsection.jpg') }}')] bg-center">
         <div class="h-screen w-full flex flex-col justify-center ml-10">
             <p class="text-5xl font-semibold text-white">AU COEUR</p>
             <p class="text-5xl font-semibold text-white">DU GRAPHISME</p>

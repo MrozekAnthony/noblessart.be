@@ -41,6 +41,15 @@
 
 <body>
     <div class="container">
+        <p>Cher utilisateur,</p>
+        <p>Nous avons bien reçu ta demande de contact et transférons le message aux oreilles de NoblessArt, qui
+            s’occupera au plus vite de reprendre contact dans les plus brefs délais avec toi.</p>
+        <p>À la prochaine,</p>
+        <p class="signature">Ta chère <i>NoblessArt</i>.</p>
+
+        <br>
+        <h3>Contenu</h3>
+
         <h1>Vous avez reçu un nouveau message de {{ $name }}</h1>
         <p class="email-title">Email:</p>
         <p>{{ $email }}</p>

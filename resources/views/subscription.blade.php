@@ -28,7 +28,7 @@
                         <p class="text-sm text-gray-500">* Étudiant ? 10% de réduction au moment de la présentation de la
                             carte étudiant !</p>
                         <div class="mt-6 text-center">
-                            <a href="#"
+                            <a href="/contact"
                                 class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-full">Souscrire</a>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                             présentation
                             d'un justificatif !</p>
                         <div class="mt-6 text-center">
-                            <a href="#"
+                            <a href="/contact"
                                 class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-full">Souscrire</a>
                         </div>
                     </div>

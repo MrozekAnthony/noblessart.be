@@ -79,7 +79,48 @@
                     </div>
                 </div>
 
-                <!-- (Add more questions as needed) -->
+                <!-- Question 6 -->
+                <div x-data="{ open: false }"
+                    class="w-full max-w-2xl mx-auto my-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <button @click="open = !open"
+                        class="flex justify-between w-full px-4 py-3 text-sm font-medium text-left bg-white rounded-t-lg hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75">
+                        Quels sont vos tarifs?
+                        ...
+                    </button>
+                    <div x-show="open" class="mt-2 border-t border-gray-200 px-4 py-3 rounded-b-lg bg-gray-50">
+                        Nos tarifs varient selon le projet. Nous offrons des services de design à partir de 9,99€.
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div x-data="{ open: false }"
+                    class="w-full max-w-2xl mx-auto my-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <button @click="open = !open"
+                        class="flex justify-between w-full px-4 py-3 text-sm font-medium text-left bg-white rounded-t-lg hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75">
+                        Combien de révision puis-je demander ?
+                        ...
+                    </button>
+                    <div x-show="open" class="mt-2 border-t border-gray-200 px-4 py-3 rounded-b-lg bg-gray-50">
+                        Par défaut, vous pouvez demander jusqu’à 3 révisions/ modifications post-création. Si vous voulez
+                        plus de modification, vous devrez alors payer un abonnement et vous en aurez alors deux
+                        supplémentaires, soit 5 révisions/ modifications au total.
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div x-data="{ open: false }"
+                    class="w-full max-w-2xl mx-auto my-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <button @click="open = !open"
+                        class="flex justify-between w-full px-4 py-3 text-sm font-medium text-left bg-white rounded-t-lg hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75">
+                        Comment se passe le paiement ?
+                        ...
+                    </button>
+                    <div x-show="open" class="mt-2 border-t border-gray-200 px-4 py-3 rounded-b-lg bg-gray-50">
+                        Un acompte à hauteur de 50% vous est demandé à la signature du devis/ offre. Le solde dû sera à
+                        payer à la réception de la facture, suivant la livraison du design final. Vous pouvez payer par
+                        Bancontact au numéro IBAN renseigné au début des conditions générales d’utilisation et également
+                        mentionné sur la facture. </div>
+                </div>
 
             </div>
         </section>

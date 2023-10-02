@@ -42,11 +42,14 @@
 
 <body>
     <div class="container">
-        <h1>Bienvenue sur Noblessart</h1>
-        <p>Nous sommes ravis de vous avoir parmi nous ! Explorez, créez et partagez avec notre communauté. Si vous avez
-            des questions, n'hésitez pas à nous contacter.</p>
+        <h1>Veuillez de pas répondre à ce mail !</h1>
+        <p>Cher utilisateur,</p>
+        <p>Bravo pour la création de ton profil personnel sur noblessart.be.</p>
+        <p>Nous sommes ravis de te compter parmi nous. Donne ton opinion, commente, partage, lâche un like et surtout,
+            amuse-toi bien et découvre le monde que NoblessArt te propose à travers son site.</p>
+        <p>Bienvenue dans <i>ta</i> communauté.</p>
         <p>Bonne création,</p>
-        <p class="signature">L'équipe Noblessart</p>
+        <p class="signature">Ta chère <i>NoblessArt</i>.</p>
     </div>
 </body>
 

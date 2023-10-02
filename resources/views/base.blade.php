@@ -198,14 +198,14 @@
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-col md:flex-row">
             <div class="p-4 md:w-full lg:w-1/3">
-                <p>Qui est NoblessArt ?</p>
-                <p>Contact :</p>
-                <p>TVA : BE 0000 000 000</p>
+                <a href='/qui-est-noblessart/1'>Qui est NoblessArt ?</p>
+                    <a>Contact :</p>
+                        <a>TVA : BE 0801.330.361</p>
             </div>
             <div class="p-4 md:w-full  lg:w-1/3">
-                <p>Mentions légales</p>
-                <p>Conditions générales d'utilisation</p>
-                <p>FAQ</p>
+                <a href="/mentions-legales">Mentions légales</a>
+                <a href="/conditions-generales-de-vente">Conditions générales d'utilisation</a>
+                <a href="/faq">FAQ</a>
             </div>
             <div class="p-4 md:w-full  lg:w-1/3">
                 <p>All rights reserved © 2023</p>
