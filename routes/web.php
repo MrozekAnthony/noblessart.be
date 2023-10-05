@@ -11,6 +11,7 @@ use App\Models\Gallery;
 use App\Models\Post;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Artisan;
 
 
 
@@ -40,6 +41,7 @@ Route::get('/', function () {
         'https://picsum.photos/id/10/500/500',
         // ... other images
     ];
+
     return view('welcome', ['images' => $images, 'slideIndex' => 1])
         ->with('galleries', Gallery::all())
         ->with('posts', Post::all());
@@ -74,7 +76,7 @@ Route::prefix('/forum')->name('thread.')->controller(ThreadController::class)->g
 Route::prefix('/dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/blog', 'blog')->middleware('checkUserRole')->name('blog');
-    Route::get('/blog/creer', 'blogForm')->middleware('checkUserRole')->name('createBlog');
+    Route::get('/blog/creer', 'blogForm')->middleware('checkUserRole')->name('blogForm');
     Route::post('/blog/creer', 'createBlog')->middleware('checkUserRole')->name('createBlog');
     Route::post('/blog/modifier/{id}', 'updateBlog')->middleware('checkUserRole')->name('updateBlog');
     Route::delete('/blog/supprimer/{id}', 'destroyBlog')->middleware('checkUserRole')->name('destroyBlog');
@@ -141,3 +143,4 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::post('/doContact', [AuthController::class, 'doContact'])->name('doContact');
+
